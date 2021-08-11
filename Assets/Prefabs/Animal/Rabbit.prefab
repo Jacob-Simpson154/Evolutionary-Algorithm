@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &653326512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 653326514}
+  - component: {fileID: 653326513}
+  m_Layer: 0
+  m_Name: Life
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &653326514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653326512}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5771034554307059197}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &653326513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653326512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca8beeaa2c00a142ae9673ef1d7a794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maturityMinMale: 90
+  maturityMaxMale: 120
+  maturityMinFemale: 180
+  maturityMaxFemale: 210
+  expectedLifetimeMin: 2920
+  expectedLifetimeMax: 4380
 --- !u!1 &5771034553233569774
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
+  length: 0
 --- !u!1 &5771034554307059186
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +169,7 @@ Transform:
   - {fileID: 5771034553233569769}
   - {fileID: 5771034553884703355}
   - {fileID: 5771034554657338845}
+  - {fileID: 653326514}
   m_Father: {fileID: 5771034554858761606}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -165,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72968027d61e914a92cb3c6104dcbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeSightRange: 5
+  eyeSightRange: 10
   eyeSightFOV: 354
 --- !u!1 &5771034554858761595
 GameObject:
@@ -276,20 +327,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sex: 0
-  food: 0
-  water: 0
+  timeController: {fileID: 0}
+  currentAgeInDays: 0
+  ageOfMaturityInDays: 0
+  ageOfDeathInDays: 0
+  isDead: 0
+  causeOfDeath: Not applicable
   visibleFood: []
   visibleWater: []
-  eyeSightRange: 10
-  eyeSightAngle: 10
+  food: 0
+  water: 0
   consumableMask:
     serializedVersion: 2
     m_Bits: 256
+  eyeSightRange: 10
+  eyeSightAngle: 10
   genes:
     size: {fileID: 5771034553233569768}
     fur: {fileID: 5771034553884703354}
     speed: {fileID: 0}
     eyesight: {fileID: 5771034554657338834}
+    lifeExpectancy: {fileID: 653326513}
     reproduction: {fileID: 0}
 --- !u!114 &1222053767
 MonoBehaviour:

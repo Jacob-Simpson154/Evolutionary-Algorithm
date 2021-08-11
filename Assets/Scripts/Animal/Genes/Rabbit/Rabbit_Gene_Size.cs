@@ -10,5 +10,6 @@ public class Rabbit_Gene_Size : GeneBase
     public override void ApplyGeneticInformation(Transform parent)
     {
         parent.transform.localScale = birthSize;
+        parent.GetComponent<AnimalBaseClass>().matureSize = matureSize;
     }
 }

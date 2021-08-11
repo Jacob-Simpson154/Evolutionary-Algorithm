@@ -9,15 +9,28 @@ public class RabbitClass : AnimalBaseClass
 
     private void Awake()
     {
+        DetermineSex();
+
         genes.size.ApplyGeneticInformation(transform);
         genes.fur.ApplyGeneticInformation(transform);
+        //genes.speed.ApplyGeneticInformation(transform);
         genes.eyesight.ApplyGeneticInformation(transform);
+        genes.lifeExpectancy.ApplyGeneticInformation(transform);
+        //genes.eyesight.ApplyGeneticInformation(transform);
+
+        timeController = FindObjectOfType<TimeController>();
+        timeController.AddDailyListener(AgeUpByDay);
+
+        sizeIncreaseByDay = (matureSize-transform.localScale) / ageOfMaturityInDays;
     }
 
     private void Update()
     {
-        FindWater();
-        FindFood();
+        if (isDead == false)
+        {
+            FindWater();
+            FindFood();
+        }
     }
 
     public override void FindFood()

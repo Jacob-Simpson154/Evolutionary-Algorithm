@@ -5,17 +5,30 @@ using UnityEngine;
 public class AnimalBaseClass : MonoBehaviour
 {
     public Sex sex;
-    public float food;
-    public float water;
 
+    [Header("Age")]
+    public TimeController timeController;
+    public int currentAgeInDays;
+    public int ageOfMaturityInDays;
+    public int ageOfDeathInDays;
+    public bool isDead = false;
+    public string causeOfDeath = "Not applicable";
+
+    [Header("Size")]
+    public Vector3 matureSize;
+    public Vector3 sizeIncreaseByDay;
+
+    [Header("Diet")]
     public List<ConsumableController> visibleFood = new List<ConsumableController>();
     public List<ConsumableController> visibleWater = new List<ConsumableController>();
+    public float food;
+    public float water;
+    public LayerMask consumableMask;
 
     [Header("Genetics - Eyesight")]
     public float eyeSightRange = 10.0f;
     public float eyeSightAngle = 10.0f;
 
-    public LayerMask consumableMask;
 
 
     //Find consumables
@@ -52,5 +65,32 @@ public class AnimalBaseClass : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void AgeUpByDay()
+    {
+        currentAgeInDays++;
+
+        if(currentAgeInDays<= ageOfMaturityInDays)
+            transform.localScale += sizeIncreaseByDay;
+
+        if(currentAgeInDays>=ageOfDeathInDays)
+        {
+            Death("Old Age");
+        }
+    }
+
+    public void DetermineSex()
+    {
+        float randomValue = Random.Range(0.0f, 1.0f);
+        if (randomValue < 0.5f)
+            sex = Sex.Female;
+        else sex = Sex.Male;
+    }
+
+    public void Death(string cause)
+    {
+        isDead = true;
+        causeOfDeath = cause;
     }
 }
