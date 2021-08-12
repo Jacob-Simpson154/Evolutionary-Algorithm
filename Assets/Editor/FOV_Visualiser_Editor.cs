@@ -14,7 +14,7 @@ public class FOV_Visualiser_Editor : Editor
 
 		Handles.color = Color.white;
 
-		Handles.DrawWireArc(FOV.transform.position, Vector3.up, Vector3.forward, 360, FOV.GetViewAngle());
+		Handles.DrawWireArc(FOV.transform.position, Vector3.up, Vector3.forward, 360, FOV.GetViewRange());
 
 		Vector3 startAngle = FOV.DirFromAngle(-FOV.GetViewAngle() / 2, false);
 		Vector3 finishAngle = FOV.DirFromAngle(FOV.GetViewAngle() / 2, false);

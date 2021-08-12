@@ -9,6 +9,11 @@ public class FOV_Visualiser : MonoBehaviour
     {
 		return GetComponent<AnimalBaseClass>().eyeSightAngle;
     }
+	
+	public float GetViewRange()
+    {
+		return GetComponent<AnimalBaseClass>().eyeSightRange;
+    }
 
 	public List<ConsumableController> GetWater()
     {

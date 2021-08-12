@@ -49,6 +49,49 @@ MonoBehaviour:
   maturityMaxFemale: 210
   expectedLifetimeMin: 2920
   expectedLifetimeMax: 4380
+--- !u!1 &2099800488466044562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6429629136209320806}
+  - component: {fileID: 4578033269657940261}
+  m_Layer: 0
+  m_Name: Reproduction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6429629136209320806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099800488466044562}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5771034554307059197}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4578033269657940261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099800488466044562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e59af936467b52244bc1b167f3dfdf6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5771034553233569774
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +213,7 @@ Transform:
   - {fileID: 5771034553884703355}
   - {fileID: 5771034554657338845}
   - {fileID: 653326514}
+  - {fileID: 6429629136209320806}
   m_Father: {fileID: 5771034554858761606}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -333,6 +377,8 @@ MonoBehaviour:
   ageOfDeathInDays: 0
   isDead: 0
   causeOfDeath: Not applicable
+  matureSize: {x: 0, y: 0, z: 0}
+  sizeIncreaseByDay: {x: 0, y: 0, z: 0}
   visibleFood: []
   visibleWater: []
   food: 0
@@ -348,7 +394,7 @@ MonoBehaviour:
     speed: {fileID: 0}
     eyesight: {fileID: 5771034554657338834}
     lifeExpectancy: {fileID: 653326513}
-    reproduction: {fileID: 0}
+    reproduction: {fileID: 4578033269657940261}
 --- !u!114 &1222053767
 MonoBehaviour:
   m_ObjectHideFlags: 0

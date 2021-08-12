@@ -6,13 +6,17 @@ public class AnimalBaseClass : MonoBehaviour
 {
     public Sex sex;
 
+    [Header("Status")]
+    public bool isDead = false;
+    public string causeOfDeath = "Not applicable";
+    public float food;
+    public float water;
+
     [Header("Age")]
     public TimeController timeController;
     public int currentAgeInDays;
     public int ageOfMaturityInDays;
     public int ageOfDeathInDays;
-    public bool isDead = false;
-    public string causeOfDeath = "Not applicable";
 
     [Header("Size")]
     public Vector3 matureSize;
@@ -21,8 +25,6 @@ public class AnimalBaseClass : MonoBehaviour
     [Header("Diet")]
     public List<ConsumableController> visibleFood = new List<ConsumableController>();
     public List<ConsumableController> visibleWater = new List<ConsumableController>();
-    public float food;
-    public float water;
     public LayerMask consumableMask;
 
     [Header("Genetics - Eyesight")]
