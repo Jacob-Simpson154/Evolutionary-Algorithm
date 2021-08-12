@@ -18,6 +18,18 @@ public class Rabbit_Gene_Life : GeneBase
     public int expectedLifetimeMin = 2920;
     public int expectedLifetimeMax = 4380;
 
+    public void Setup(Sex sex, float maturityMin, float maturityMax, float expectedMin, float expectedMax)
+    {
+        if(sex == Sex.Female)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
     public override void ApplyGeneticInformation(Transform parent)
     {
         AnimalBaseClass rabbit = parent.GetComponent<AnimalBaseClass>();

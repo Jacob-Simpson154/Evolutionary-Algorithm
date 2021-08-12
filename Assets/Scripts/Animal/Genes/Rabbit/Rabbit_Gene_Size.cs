@@ -7,6 +7,11 @@ public class Rabbit_Gene_Size : GeneBase
     [SerializeField] Vector3 birthSize;
     [SerializeField] Vector3 matureSize;
 
+    public override void Setup(float mod)
+    {
+        matureSize = matureSize * mod;
+    }
+
     public override void ApplyGeneticInformation(Transform parent)
     {
         parent.transform.localScale = birthSize;

@@ -31,7 +31,10 @@ public class AnimalBaseClass : MonoBehaviour
     public float eyeSightRange = 10.0f;
     public float eyeSightAngle = 10.0f;
 
+    public virtual void Activate()
+    {
 
+    }
 
     //Find consumables
     //Find food is virtual as some animals may have specific diets whereas all animals need food
@@ -82,12 +85,14 @@ public class AnimalBaseClass : MonoBehaviour
         }
     }
 
-    public void DetermineSex()
+    public Sex DetermineSex()
     {
         float randomValue = Random.Range(0.0f, 1.0f);
         if (randomValue < 0.5f)
             sex = Sex.Female;
         else sex = Sex.Male;
+
+        return sex;
     }
 
     public void Death(string cause)

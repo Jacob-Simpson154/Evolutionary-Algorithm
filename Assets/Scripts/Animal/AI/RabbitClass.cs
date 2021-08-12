@@ -10,7 +10,7 @@ public class RabbitClass : AnimalBaseClass
     [Header("Predators")]
     public List<Transform> spottedPredators = new List<Transform>();
     public LayerMask predatorMask;
-    private void Awake()
+    public override void Activate()
     {
         DetermineSex();
 

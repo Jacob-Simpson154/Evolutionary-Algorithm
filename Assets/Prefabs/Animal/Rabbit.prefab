@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5771034554307059197}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &653326513
 MonoBehaviour:
@@ -49,6 +49,50 @@ MonoBehaviour:
   maturityMaxFemale: 210
   expectedLifetimeMin: 2920
   expectedLifetimeMax: 4380
+--- !u!1 &1690887387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1690887388}
+  - component: {fileID: 1690887389}
+  m_Layer: 0
+  m_Name: Speed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1690887388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690887387}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5771034554307059197}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1690887389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690887387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88f3be37d50e674fa2ef2dcbe03982b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
 --- !u!1 &2099800488466044562
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +122,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5771034554307059197}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4578033269657940261
 MonoBehaviour:
@@ -180,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5846bd35f4a61f846b5dba4891239bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: {r: 1, g: 0, b: 0, a: 0}
+  colour: {r: 0.3207547, g: 0.101906836, b: 0, a: 0}
   length: 0
 --- !u!1 &5771034554307059186
 GameObject:
@@ -211,6 +255,7 @@ Transform:
   m_Children:
   - {fileID: 5771034553233569769}
   - {fileID: 5771034553884703355}
+  - {fileID: 1690887388}
   - {fileID: 5771034554657338845}
   - {fileID: 653326514}
   - {fileID: 6429629136209320806}
@@ -246,7 +291,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5771034554307059197}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5771034554657338834
 MonoBehaviour:
@@ -371,18 +416,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sex: 0
+  isDead: 0
+  causeOfDeath: Not applicable
+  food: 0
+  water: 0
   timeController: {fileID: 0}
   currentAgeInDays: 0
   ageOfMaturityInDays: 0
   ageOfDeathInDays: 0
-  isDead: 0
-  causeOfDeath: Not applicable
   matureSize: {x: 0, y: 0, z: 0}
   sizeIncreaseByDay: {x: 0, y: 0, z: 0}
   visibleFood: []
   visibleWater: []
-  food: 0
-  water: 0
   consumableMask:
     serializedVersion: 2
     m_Bits: 256
@@ -391,10 +436,14 @@ MonoBehaviour:
   genes:
     size: {fileID: 5771034553233569768}
     fur: {fileID: 5771034553884703354}
-    speed: {fileID: 0}
+    speed: {fileID: 1690887389}
     eyesight: {fileID: 5771034554657338834}
     lifeExpectancy: {fileID: 653326513}
     reproduction: {fileID: 4578033269657940261}
+  spottedPredators: []
+  predatorMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1222053767
 MonoBehaviour:
   m_ObjectHideFlags: 0
