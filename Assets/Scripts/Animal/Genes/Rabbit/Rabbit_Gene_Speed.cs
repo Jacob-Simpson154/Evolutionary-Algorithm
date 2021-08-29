@@ -12,9 +12,19 @@ public class Rabbit_Gene_Speed : GeneBase
         speed = speed * mod;
     }
 
+    public override void Creation(float value)
+    {
+        speed = value;
+    }
+
 
     public override void ApplyGeneticInformation(Transform parent)
     {
         base.ApplyGeneticInformation(parent);
+    }
+
+    public override float GetGene()
+    {
+        return speed;
     }
 }

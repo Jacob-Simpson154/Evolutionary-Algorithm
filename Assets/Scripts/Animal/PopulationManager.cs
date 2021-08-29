@@ -11,6 +11,8 @@ public class PopulationManager : MonoBehaviour
     public List<PopulationManagerStruct> population;
 
 
+    public List<AnimalBaseClass> trackedAnimals;
+
     private void Awake()
     {
         foreach (PopulationManagerStruct item in population)
@@ -36,21 +38,27 @@ public class PopulationManager : MonoBehaviour
 
                 if (item.species == animalType.rabbit)
                 {
-                    animal.GetComponentInChildren<Rabbit_Gene_Size>().Setup(sizeMod);
+                    RabbitClass rabbitClass = animal.GetComponent<RabbitClass>();
+                    RabbitGenetics genetics = rabbitClass.genes;
 
-                    animal.GetComponentInChildren<Rabbit_Gene_Fur>().Setup(item.colourRangeMin, item.colourRangeMax);
+                    genetics.size.Setup(sizeMod);
+                    //special setup function requires alternate get path
+                    genetics.fur.GetComponent<Rabbit_Gene_Fur>().Setup(item.colourRangeMin, item.colourRangeMax);
+                    genetics.speed.Setup(speedMod);
+                    genetics.eyesight.GetComponent<Rabbit_Gene_Eyesight>().Setup(eyesightRangeMod, eyesightFOVMod);
 
-                    animal.GetComponentInChildren<Rabbit_Gene_Speed>().Setup(speedMod);
-                    animal.GetComponentInChildren<Rabbit_Gene_Eyesight>().Setup(eyesightRangeMod, eyesightFOVMod);
+                    if (rabbitClass.DetermineSex() == Sex.Female)
+                        genetics.lifeExpectancy.GetComponent<Rabbit_Gene_Life>().Setup(Sex.Female, maturityFemaleModMin, maturityFemaleModMax, lifeExpectancyMin, lifeExpectancyMax);
+                    else genetics.lifeExpectancy.GetComponent<Rabbit_Gene_Life>().Setup(Sex.Male, maturityMaleModMin, maturityMaleModMax, lifeExpectancyMin, lifeExpectancyMax);
 
-                    if (animal.GetComponent<RabbitClass>().DetermineSex() == Sex.Female)
-                        animal.GetComponentInChildren<Rabbit_Gene_Life>().Setup(Sex.Female, maturityFemaleModMin, maturityFemaleModMax, lifeExpectancyMin, lifeExpectancyMax);
-                    else animal.GetComponentInChildren<Rabbit_Gene_Life>().Setup(Sex.Male, maturityMaleModMin, maturityMaleModMax, lifeExpectancyMin, lifeExpectancyMax);
-
-                    animal.GetComponent<RabbitClass>().Activate();
+                    rabbitClass.Activate();
                 }
+
+                trackedAnimals.Add(animal.GetComponent<AnimalBaseClass>());
             }
         }
+
+        FindObjectOfType<ReproductionManager>().Test(trackedAnimals[0], trackedAnimals[5]);
     }
 }
                     ////Size

@@ -12,9 +12,32 @@ public class Rabbit_Gene_Size : GeneBase
         matureSize = matureSize * mod;
     }
 
+    public void Creation(Vector3 size)
+    {
+        matureSize = size;
+    }
+
+    
+
     public override void ApplyGeneticInformation(Transform parent)
     {
         parent.transform.localScale = birthSize;
         parent.GetComponent<AnimalBaseClass>().matureSize = matureSize;
     }
+
+    /// <summary>
+    /// Returns x y and z component of gene relevant to i.
+    /// </summary>
+    public override float GetGene(int i)
+    {
+        if(i== 0)
+            return matureSize.x;        
+        if(i== 1)
+            return matureSize.y;
+        if (i == 2)
+            return matureSize.z;
+        else return 0;
+    }
+
+    
 }

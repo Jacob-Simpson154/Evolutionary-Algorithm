@@ -19,7 +19,6 @@ public class RabbitClass : AnimalBaseClass
         //genes.speed.ApplyGeneticInformation(transform);
         genes.eyesight.ApplyGeneticInformation(transform);
         genes.lifeExpectancy.ApplyGeneticInformation(transform);
-        //genes.eyesight.ApplyGeneticInformation(transform);
 
         timeController = FindObjectOfType<TimeController>();
         timeController.AddDailyListener(AgeUpByDay);
