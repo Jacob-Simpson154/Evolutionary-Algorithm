@@ -12,11 +12,9 @@ public class RabbitClass : AnimalBaseClass
     public LayerMask predatorMask;
     public override void Activate()
     {
-        DetermineSex();
-
         genes.size.ApplyGeneticInformation(transform);
         genes.fur.ApplyGeneticInformation(transform);
-        //genes.speed.ApplyGeneticInformation(transform);
+        genes.speed.ApplyGeneticInformation(transform);
         genes.eyesight.ApplyGeneticInformation(transform);
         genes.lifeExpectancy.ApplyGeneticInformation(transform);
 

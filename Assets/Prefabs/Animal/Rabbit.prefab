@@ -416,6 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sex: 0
+  species: 0
   isDead: 0
   causeOfDeath: Not applicable
   food: 0

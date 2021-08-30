@@ -16,8 +16,8 @@ public class AnimalBaseClass : MonoBehaviour
     [Header("Age")]
     public TimeController timeController;
     public int currentAgeInDays;
-    public int ageOfMaturityInDays;
-    public int ageOfDeathInDays;
+    public float ageOfMaturityInDays;
+    public float ageOfDeathInDays;
 
     [Header("Size")]
     public Vector3 matureSize;
