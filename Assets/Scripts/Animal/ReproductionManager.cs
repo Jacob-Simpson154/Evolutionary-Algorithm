@@ -76,9 +76,9 @@ public class ReproductionManager : MonoBehaviour
 
         char[] dataA = parent1.ToString().ToCharArray();
         char[] dataB = parent2.ToString().ToCharArray();
-        char[] dataC = dataA;
 
-        AllignArray(dataA, dataB);
+        AllignArray(ref dataA, ref dataB);
+        char[] dataC = dataA;
 
         int crossoverPoint1 = UnityEngine.Random.Range(0, dataA.Length-1);
         int crossoverPoint2 = UnityEngine.Random.Range(crossoverPoint1, dataB.Length-1);
@@ -93,11 +93,12 @@ public class ReproductionManager : MonoBehaviour
 
         return offspring;
     }
+
     /// <summary>
     /// Crossover relies on arrays having the decimal at same position,
     /// and being the same overall length. Function alligns arrays.
     /// </summary>
-    public void AllignArray(char[] dataA, char[] dataB)
+    public void AllignArray(ref char[] dataA, ref char[] dataB)
     {
         bool dataHasDecimalA = false;
         bool dataHasDecimalB = false;
@@ -141,6 +142,8 @@ public class ReproductionManager : MonoBehaviour
                 dataBDecimal.RemoveRange(0, decimalPointB + 1);
             }
 
+
+
             if(dataAWholeNumber.Count < dataBWholeNumber.Count)
             {
                 int difference = dataBWholeNumber.Count - dataAWholeNumber.Count;
@@ -158,6 +161,9 @@ public class ReproductionManager : MonoBehaviour
                     dataBWholeNumber.Insert(0, '0');
                 }
             }
+
+
+
 
             if (dataADecimal.Count < dataBDecimal.Count)
             {
@@ -177,14 +183,14 @@ public class ReproductionManager : MonoBehaviour
                 }
             }
 
+
+
+
             dataAWholeNumber.Add('.');
             dataAWholeNumber.AddRange(dataADecimal);
 
             dataBWholeNumber.Add('.');
             dataBWholeNumber.AddRange(dataBDecimal);
-
-            //Array.Clear(dataA, 0, dataA.Length);
-            //Array.Clear(dataB, 0, dataB.Length);
 
             dataA = dataAWholeNumber.ToArray();
             dataB = dataBWholeNumber.ToArray();
