@@ -71,6 +71,7 @@ MonoBehaviour:
     expectedLifetimeMinVariationMax: 1.25
     expectedLifetimeMaxVariationMin: 0.75
     expectedLifetimeMaxVariationMax: 1.25
+  trackedAnimals: []
 --- !u!114 &6284237154607632478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,3 +84,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1654b50e6d2ce642bd2f0f49ae49daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mutationChance: 3

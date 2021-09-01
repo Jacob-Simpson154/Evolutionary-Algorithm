@@ -5,7 +5,7 @@ using System;
 
 public class ReproductionManager : MonoBehaviour
 {
-    [SerializeField] float mutationChance = 0.3f;
+    [SerializeField] float mutationChance = 0.1f;
 
 
 
@@ -17,7 +17,9 @@ public class ReproductionManager : MonoBehaviour
         b.transform.position = b.transform.position + transform.forward * 4;
     }
 
-
+    /// <summary>
+    /// Mix the genetics of both parents
+    /// </summary>
     public void Crossover(Transform parent1, Transform parent2)
     {
 
@@ -29,27 +31,42 @@ public class ReproductionManager : MonoBehaviour
             //Mix genetics////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             float offspring_Size_X = TwoPointPrecision(genesA.size.GetGene(0), genesB.size.GetGene(0));
+            offspring_Size_X = ShouldMutate() ? Mutate(offspring_Size_X): offspring_Size_X;
             float offspring_Size_Y = TwoPointPrecision(genesA.size.GetGene(1), genesB.size.GetGene(1));
+            offspring_Size_Y = ShouldMutate() ? Mutate(offspring_Size_Y) : offspring_Size_Y;
             float offspring_Size_Z = TwoPointPrecision(genesA.size.GetGene(2), genesB.size.GetGene(2));
+            offspring_Size_Z = ShouldMutate() ? Mutate(offspring_Size_Z) : offspring_Size_Z;
 
             float offspring_ColourRed = TwoPointPrecision(genesA.fur.GetGene(0), genesB.fur.GetGene(0));
+            offspring_ColourRed = ShouldMutate() ? Mutate(offspring_ColourRed) : offspring_ColourRed;
             float offspring_ColourGreen = TwoPointPrecision(genesA.fur.GetGene(1), genesB.fur.GetGene(1));
+            offspring_ColourGreen = ShouldMutate() ? Mutate(offspring_ColourGreen) : offspring_ColourGreen;
             float offspring_ColourBlue = TwoPointPrecision(genesA.fur.GetGene(2), genesB.fur.GetGene(2));
+            offspring_ColourBlue = ShouldMutate() ? Mutate(offspring_ColourBlue) : offspring_ColourBlue;
 
             float offspring_Speed = TwoPointPrecision(genesA.speed.GetGene(), genesB.speed.GetGene());
+            offspring_Speed = ShouldMutate() ? Mutate(offspring_Speed) : offspring_Speed;
 
             float offspring_EyesightRange = TwoPointPrecision(genesA.eyesight.GetGene(0), genesB.eyesight.GetGene(0));
+            offspring_EyesightRange = ShouldMutate() ? Mutate(offspring_EyesightRange) : offspring_EyesightRange;
             float offspring_EyesightFOV = TwoPointPrecision(genesA.eyesight.GetGene(1), genesB.eyesight.GetGene(1));
+            offspring_EyesightFOV = ShouldMutate() ? Mutate(offspring_EyesightFOV) : offspring_EyesightFOV;
 
 
             float offspring_MaturityMaleMin = TwoPointPrecision(genesA.lifeExpectancy.GetGene(0), genesB.lifeExpectancy.GetGene(0));
+            offspring_MaturityMaleMin = ShouldMutate() ? Mutate(offspring_MaturityMaleMin) : offspring_MaturityMaleMin;
             float offspring_MaturityMaleMax = TwoPointPrecision(genesA.lifeExpectancy.GetGene(1), genesB.lifeExpectancy.GetGene(1));
+            offspring_MaturityMaleMax = ShouldMutate() ? Mutate(offspring_MaturityMaleMax) : offspring_MaturityMaleMax;
             
             float offspring_MaturityFemaleMin = TwoPointPrecision(genesA.lifeExpectancy.GetGene(2), genesB.lifeExpectancy.GetGene(2));
+            offspring_MaturityFemaleMin = ShouldMutate() ? Mutate(offspring_MaturityFemaleMin) : offspring_MaturityFemaleMin;
             float offspring_MaturityFemaleMax = TwoPointPrecision(genesA.lifeExpectancy.GetGene(3), genesB.lifeExpectancy.GetGene(3));
+            offspring_MaturityFemaleMax = ShouldMutate() ? Mutate(offspring_MaturityFemaleMax) : offspring_MaturityFemaleMax;
             
             float offspring_LifetimeMin = TwoPointPrecision(genesA.lifeExpectancy.GetGene(4), genesB.lifeExpectancy.GetGene(4));
+            offspring_LifetimeMin = ShouldMutate() ? Mutate(offspring_LifetimeMin) : offspring_LifetimeMin;
             float offspring_LifetimeMax = TwoPointPrecision(genesA.lifeExpectancy.GetGene(5), genesB.lifeExpectancy.GetGene(5));
+            offspring_LifetimeMax = ShouldMutate() ? Mutate(offspring_LifetimeMax) : offspring_LifetimeMax;
 
 
             //Create animal and apply genes////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,6 +87,9 @@ public class ReproductionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used for crossover.
+    /// </summary>
     float TwoPointPrecision(float parent1, float parent2)
     {
         float offspring = 0;
@@ -98,7 +118,7 @@ public class ReproductionManager : MonoBehaviour
     /// Crossover relies on arrays having the decimal at same position,
     /// and being the same overall length. Function alligns arrays.
     /// </summary>
-    public void AllignArray(ref char[] dataA, ref char[] dataB)
+    void AllignArray(ref char[] dataA, ref char[] dataB)
     {
         bool dataHasDecimalA = false;
         bool dataHasDecimalB = false;
@@ -195,5 +215,51 @@ public class ReproductionManager : MonoBehaviour
             dataA = dataAWholeNumber.ToArray();
             dataB = dataBWholeNumber.ToArray();
         }
+    }
+
+    bool ShouldMutate()
+    {
+        float possibility = UnityEngine.Random.Range(0.0f, 100.0f);
+        if (possibility <= mutationChance)
+            return true;
+        else return false;
+    }
+
+    float Mutate(float value)
+    {
+        Debug.Log("Mutation has occured");
+
+        char[] data = value.ToString().ToCharArray();
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            if(data[i] != '.')
+            {
+                int plusOrMinus = UnityEngine.Random.Range(0, 2);
+                if (plusOrMinus == 0)
+                {
+                    int test = int.Parse(data[i].ToString());
+                    if((test-1) >= 0)
+                    {
+                        data[i]--;
+                    }
+                } 
+                
+                else 
+
+                if(plusOrMinus == 1)
+                {
+                    int test = int.Parse(data[i].ToString());
+                    if ((test + 1) <= 9)
+                    {
+                        data[i]++;
+                    }
+                }
+            }
+        }
+
+
+
+        return value;
     }
 }
