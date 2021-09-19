@@ -7,7 +7,7 @@ public class TileController : MonoBehaviour
     public Transform nodePosition;
     public bool canTraverse;
 
-    public List<ConsumableController> trackedNourishment;
+    public List<ConsumableController> trackedNourishment = new List<ConsumableController>();
     public ConsumableDetails tileNourishment;
 
     [SerializeField]float temperature = 1.0f;
@@ -26,8 +26,6 @@ public class TileController : MonoBehaviour
 
     public void AddNourishment(ConsumableController cc)
     {
-        if (trackedNourishment == null)
-            trackedNourishment = new List<ConsumableController>();
         trackedNourishment.Add(cc);
     }
 

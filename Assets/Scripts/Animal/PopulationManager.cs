@@ -13,7 +13,7 @@ public class PopulationManager : MonoBehaviour
 
     public List<AnimalBaseClass> trackedAnimals;
 
-    private void Awake()
+    public void Awake()
     {
         foreach (PopulationManagerStruct item in population)
         {
@@ -57,31 +57,5 @@ public class PopulationManager : MonoBehaviour
                 trackedAnimals.Add(animal.GetComponent<AnimalBaseClass>());
             }
         }
-
-        FindObjectOfType<ReproductionManager>().Test(trackedAnimals[0], trackedAnimals[5]);
     }
 }
-                    ////Size
-                    //animal.GetComponentInChildren<Rabbit_Gene_Size>().Setup(item.sizeVariationMin, item.sizeVariationMax);
-
-                    ////Colour
-
-                    ////Speed
-                    //animal.GetComponentInChildren<Rabbit_Gene_Speed>().Setup(item.speedVariationMin, item.speedVariationMax);
-
-                    ////Eyesight
-                    //animal.GetComponentInChildren<Rabbit_Gene_Eyesight>().Setup(item.eyeSightRangeMin, item.eyeSightRangeMax, item.eyeSightFOVMin, item.eyeSightFOVMax);
-
-                    ////Life
-                    //if(animal.GetComponent<RabbitClass>().DetermineSex() == Sex.Female)
-                    //{
-                    //    animal.GetComponentInChildren<Rabbit_Gene_Life>().Setup(Sex.Female, Random.Range(item.maturityMinFemaleVariationMin, item.maturityMinFemaleVariationMax),
-                    //        Random.Range(item.maturityMaxFemaleVariationMin, item.maturityMaxFemaleVariationMax), Random.Range(item.expectedLifetimeMinVariationMin, item.expectedLifetimeMinVariationMax), 
-                    //        Random.Range(item.expectedLifetimeMaxVariationMin, item.expectedLifetimeMaxVariationMax));
-                    //}
-                    //else
-                    //{
-                    //    animal.GetComponentInChildren<Rabbit_Gene_Life>().Setup(Sex.Male, Random.Range(item.maturityMinMaleVariationMin, item.maturityMinMaleVariationMax),
-                    //        Random.Range(item.maturityMaxMaleVariationMin, item.maturityMaxMaleVariationMax), Random.Range(item.expectedLifetimeMinVariationMin, item.expectedLifetimeMinVariationMax),
-                    //        Random.Range(item.expectedLifetimeMaxVariationMin, item.expectedLifetimeMaxVariationMax));
-                    //}

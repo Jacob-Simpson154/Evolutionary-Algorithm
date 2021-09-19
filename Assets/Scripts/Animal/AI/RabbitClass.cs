@@ -28,10 +28,82 @@ public class RabbitClass : AnimalBaseClass
     {
         if (isDead == false)
         {
-            FindWater();
-            FindFood();
+            if(hasTarget == true)
+            {
+                if (path.Count > 0)
+                {
+                    transform.rotation = Quaternion.LookRotation(path[0] - transform.position);
+                    transform.position = Vector3.MoveTowards(transform.position, path[0], Time.deltaTime);
+                    if (transform.position == path[0])
+                    {
+                        path.RemoveAt(0);
+                    }
+                } else
+                {
+                    FinaliseState();
+                }
+            }
+
+            else
+
+            if (hasTarget == false)
+            {
+                FindWater();
+                FindFood();
+
+                ChooseState();
+            }    
         }
     }
+
+    public override void ChooseState()
+    {
+        if (IsThirsty())
+        {
+            Transform destination = GetClosestWater();
+            if (destination != null)
+            {
+                MoveToTarget(destination.position);
+                hasTarget = true;
+                target = destination;
+                currentState = Action.thirsty;
+            }
+            return;
+        }
+
+        if(IsHungry())
+        {
+            //MoveToTarget food
+            return;
+        }
+
+        MoveToTarget(CreatePointInReach(10));
+    }
+
+    public override void FinaliseState()
+    {
+        switch (currentState)
+        {
+            case Action.hungry:
+                break;
+            case Action.thirsty:
+                Debug.Log("Drinking");
+
+                ConsumableDetails nourishment = target.GetComponent<TileController>().GetNourishment();
+                water += nourishment.hydrationAmount;
+                food += nourishment.nutritionalAmount;
+
+                break;
+            case Action.moving:
+                break;
+            default:
+                break;
+        }
+        
+        
+        ChooseState();
+    }
+
 
     public override void FindFood()
     {
@@ -112,4 +184,6 @@ public class RabbitClass : AnimalBaseClass
             }
         }
     }
+
+
 }

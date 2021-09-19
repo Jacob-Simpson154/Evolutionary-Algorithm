@@ -12,12 +12,20 @@ public class Rabbit_Gene_Eyesight : GeneBase
     {
         eyeSightRange = eyeSightRange * range;
         eyeSightFOV = eyeSightFOV * fov;
+        ControlCheck();
     }
 
     public void Creation(float range, float fov)
     {
         eyeSightRange = range;
         eyeSightFOV = fov;
+        ControlCheck();
+    }
+
+    void ControlCheck()
+    {
+        if (eyeSightFOV > 360)
+            eyeSightFOV = 360;
     }
 
     public override void ApplyGeneticInformation(Transform parent)

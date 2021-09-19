@@ -92,6 +92,8 @@ GameObject:
   - component: {fileID: 1103246687437811706}
   - component: {fileID: 3938080741875913437}
   - component: {fileID: 3465847491153265626}
+  - component: {fileID: -8807121022086565795}
+  - component: {fileID: 8678993142398989432}
   m_Layer: 0
   m_Name: Tile_Dirt
   m_TagString: Untagged
@@ -188,10 +190,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePosition: {fileID: 2192100393124427133}
-  canTraverse: 0
+  canTraverse: 1
   trackedNourishment: []
   tileNourishment:
     hydrationAmount: 0
     nutritionalAmount: 0
-  tileTemperature: 30
-  ambientTemperatureLoss: 1
+  temperature: 1
+--- !u!114 &-8807121022086565795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8046071938595948727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1944f07166c872d419ebdecabdd57025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkable: 0
+  worldPosition: {x: 0, y: 0, z: 0}
+  gridPos: {x: 0, y: 0}
+  gCost: 0
+  hCost: 0
+  parent: {fileID: 0}
+--- !u!114 &8678993142398989432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8046071938595948727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f1025e5a06955e44bf390e47dbe76c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  penaltyCost: 1

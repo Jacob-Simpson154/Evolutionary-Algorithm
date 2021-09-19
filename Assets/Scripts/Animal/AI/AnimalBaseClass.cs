@@ -10,8 +10,10 @@ public class AnimalBaseClass : MonoBehaviour
     [Header("Status")]
     public bool isDead = false;
     public string causeOfDeath = "Not applicable";
-    public float food;
-    public float water;
+    public float food = 100;
+    [SerializeField] float hungry = 50;
+    public float water = 100;
+    [SerializeField] float thirsy = 50;
 
     [Header("Age")]
     public TimeController timeController;
@@ -31,6 +33,13 @@ public class AnimalBaseClass : MonoBehaviour
     [Header("Genetics - Eyesight")]
     public float eyeSightRange = 10.0f;
     public float eyeSightAngle = 10.0f;
+
+    [Header("Navigation")]
+    public bool hasTarget = false;
+    public Action currentState;
+    public Transform target;
+    public List<Vector3> path = new List<Vector3>();
+
 
     public virtual void Activate()
     {
@@ -73,6 +82,22 @@ public class AnimalBaseClass : MonoBehaviour
         }
     }
 
+    public Transform GetClosestWater()
+    {
+        if (visibleWater.Count > 0)
+        {
+            Transform cloestestSource = visibleWater[0].transform;
+            foreach (ConsumableController item in visibleWater)
+            {
+                if (GetDistance(item.transform.position) < GetDistance(cloestestSource.position))
+                    cloestestSource = item.transform;
+            }
+
+            return cloestestSource;
+        }
+        else return null;
+    }
+
     public void AgeUpByDay()
     {
         currentAgeInDays++;
@@ -101,4 +126,79 @@ public class AnimalBaseClass : MonoBehaviour
         isDead = true;
         causeOfDeath = cause;
     }
+
+    public bool IsHungry()
+    {
+        if (food <= hungry)
+            return true;
+        else return false;
+    }
+
+    public bool IsThirsty()
+    {
+        if (water <= thirsy)
+            return true;
+        else return false;
+    }
+
+    public float GetDistance(Vector3 destination)
+    {
+        return Vector3.Distance(transform.position, destination);
+    }
+
+
+
+
+
+
+
+
+
+    public virtual void ChooseState()
+    {
+
+    }
+    public virtual void FinaliseState()
+    {
+
+    }
+
+
+
+    public void MoveToTarget(Vector3 target)
+    {
+        PathManager.RequestPath(new PathRequest(transform.position, target, PathCallback));
+    }
+
+    public void PathCallback(Vector3[] waypoints, bool pathSuccessful)
+    {
+        if (pathSuccessful)
+        {
+            Debug.Log("Found path");
+            path.Clear();
+            path.AddRange(waypoints);
+        }
+        else
+        {
+            Debug.Log("cant find path");
+        }
+    }
+
+    public Vector3 CreatePointInReach(float distance)
+    {
+        Vector3 randomPoint = transform.position + Random.insideUnitSphere * distance;
+        RaycastHit hit;
+        randomPoint.y = 500f;
+        if (Physics.Raycast(randomPoint, Vector3.down, out hit, 1000f))
+        {
+            return hit.point;
+        }
+        else return randomPoint;
+    }
+}
+
+
+public enum Action
+{
+    hungry, thirsty, moving
 }
