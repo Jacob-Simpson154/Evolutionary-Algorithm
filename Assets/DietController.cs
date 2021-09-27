@@ -11,27 +11,44 @@ public class DietController : MonoBehaviour
     public List<ConsumableController> visibleWater = new List<ConsumableController>();
     public LayerMask consumableMask;
 
+    [Header("Current Dietry Values")]
     public float food = 0;
     public float water = 0;
-    float hungry = 40;
-    float thirsty = 40;
 
+    [Header("Daily requirements")]
+    public float foodConsumedPerDay = 2000;
+    public float waterConsumedPerDay = 2000;
+
+    [Header("Percentile motivation")]
+    [Tooltip("At what percentage of current food to food required per day does animal get hungry and start looking for food")]
+    public float hungry = 40;
+    [Tooltip("At what percentage of current water to water required per day does animal get thirsty and start looking for water")]
+    public float thirsty = 40;
+
+    
 
     public void Init(AnimalManager m)
     {
         manager = m;
     }
 
+    void Update()
+    {
+        float t = manager.timeCon.GetDayTimer();
+        food -= foodConsumedPerDay*t;
+        water -= waterConsumedPerDay*t;
+    }
+
     public bool IsThirsty()
     {
-        if(water <= thirsty)
+        if (((water / waterConsumedPerDay) * 100) <= thirsty)
             return true;
         return false;
     }
 
     public bool IsHungry()
     {
-        if(food<=hungry)
+        if(((food/foodConsumedPerDay)*100)<=hungry)
             return true;
         return false;
     }

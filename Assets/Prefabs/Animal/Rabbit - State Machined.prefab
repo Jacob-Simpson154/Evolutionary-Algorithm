@@ -687,7 +687,7 @@ MonoBehaviour:
   state_target: {fileID: 0}
   movement_path: []
   eyeSightRange: 10
-  eyeSightAngle: 10
+  eyeSightAngle: 360
 --- !u!1 &6241093620401811192
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thinkState: {fileID: 7211966659746050659}
+  buffer: {x: 0, y: 0.3, z: 0}
 --- !u!1 &7282808394154212841
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class AnimalManager : MonoBehaviour
     [Header("Requirements")]
     public Astar navigation;
     public DietController diet;
+    public TimeController timeCon;
 
     [Header("State variables")]
     public Transform state_target;
@@ -22,6 +23,7 @@ public class AnimalManager : MonoBehaviour
 
     private void Start()
     {
+        timeCon = FindObjectOfType<TimeController>();
         navigation.Init(this);  
         diet.Init(this);
     }

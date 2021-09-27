@@ -15,15 +15,15 @@ public class EatState : State
     {
         if (manager.state_target.GetComponent<TileController>())
         {
-            timer += Time.deltaTime;
-            if (timer >= timeToConsume)
-            {
-                timer = 0;
+            //timer += Time.deltaTime;
+            //if (timer >= timeToConsume)
+            //{
+            //  timer = 0;
                 manager.diet.Consume(manager.state_target.GetComponent<TileController>().GetNourishment());
                 manager.state_target = null;
 
                 return thinkState;
-            }
+            //}
         }
 
 
