@@ -98,24 +98,24 @@ MonoBehaviour:
     - {fileID: 7465730537255870348}
     - {fileID: 3896230644307196795}
     - {fileID: 876223733166221200}
-    hydrationAmount: 0
-    nutritionAmount: 5
+    hydrationAmount: 50
+    nutritionAmount: 200
     daysToMature: 2
   - GO:
     - {fileID: 3991374601098091891}
     - {fileID: 2343272120447766321}
     - {fileID: 3811954969361317844}
     - {fileID: 6327526852093429752}
-    hydrationAmount: 10
-    nutritionAmount: 20
+    hydrationAmount: 100
+    nutritionAmount: 700
     daysToMature: 10
   - GO:
     - {fileID: 7346633538135729117}
     - {fileID: 2035091366441594373}
     - {fileID: 3877119865258558627}
     - {fileID: 6302965580255900299}
-    hydrationAmount: 30
-    nutritionAmount: 50
+    hydrationAmount: 300
+    nutritionAmount: 1500
     daysToMature: 0
 --- !u!1 &847763840069116863
 GameObject:

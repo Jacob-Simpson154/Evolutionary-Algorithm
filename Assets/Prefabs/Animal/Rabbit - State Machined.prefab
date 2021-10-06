@@ -93,6 +93,97 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveState: {fileID: 6703111234597456421}
+--- !u!1 &1267416547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1267416548}
+  - component: {fileID: 1267416549}
+  m_Layer: 0
+  m_Name: Sleep
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1267416548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267416547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 27848778435588592}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1267416549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267416547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec6c4fcb14014b43af4b9d5004ef156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thinkState: {fileID: 7211966659746050659}
+--- !u!1 &1475220084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1475220085}
+  - component: {fileID: 1475220086}
+  m_Layer: 0
+  m_Name: Sleep
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1475220085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475220084}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3209821317729054666}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1475220086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475220084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c127fc8765102dc4baf857e123ae9727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSleep: 0
+  averageSleepPerDayInHours: 8
+  timeWithoutSleep: 0
+  isSleeping: 0
 --- !u!1 &1690887387
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,8 +322,12 @@ MonoBehaviour:
   consumableMask:
     serializedVersion: 2
     m_Bits: 256
-  food: 0
-  water: 0
+  food: 2000
+  water: 2000
+  foodConsumedPerDay: 2000
+  waterConsumedPerDay: 2000
+  hungry: 40
+  thirsty: 40
 --- !u!1 &2099800488466044562
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +418,7 @@ MonoBehaviour:
   eatState: {fileID: 485876441}
   drinkState: {fileID: 1857107504}
   searchState: {fileID: 1211102628}
+  sleepState: {fileID: 1267416549}
 --- !u!1 &2747716456881954318
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +494,7 @@ Transform:
   - {fileID: 1423095729485635179}
   - {fileID: 4047250364064797196}
   - {fileID: 1211102627}
+  - {fileID: 1267416548}
   m_Father: {fileID: 5771034554858761606}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -684,6 +781,8 @@ MonoBehaviour:
   currentState: {fileID: 7211966659746050659}
   navigation: {fileID: 2667959056124177218}
   diet: {fileID: 5475918928996497504}
+  sleep: {fileID: 1475220086}
+  timeCon: {fileID: 0}
   state_target: {fileID: 0}
   movement_path: []
   eyeSightRange: 10
@@ -732,7 +831,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thinkState: {fileID: 7211966659746050659}
-  buffer: {x: 0, y: 0.3, z: 0}
+  positionOffset: {x: 0, y: 0.25, z: 0}
+  speed: 100
 --- !u!1 &7282808394154212841
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,6 +862,7 @@ Transform:
   m_Children:
   - {fileID: 3408809495465669827}
   - {fileID: 3314441364544877458}
+  - {fileID: 1475220085}
   m_Father: {fileID: 5771034554858761606}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

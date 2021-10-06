@@ -227,8 +227,6 @@ public class ReproductionManager : MonoBehaviour
 
     float Mutate(float value)
     {
-        Debug.Log("Mutation has occured");
-
         char[] data = value.ToString().ToCharArray();
 
         for (int i = 0; i < data.Length; i++)

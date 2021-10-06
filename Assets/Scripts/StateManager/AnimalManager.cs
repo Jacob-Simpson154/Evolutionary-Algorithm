@@ -10,6 +10,7 @@ public class AnimalManager : MonoBehaviour
     [Header("Requirements")]
     public Astar navigation;
     public DietController diet;
+    public SleepController sleep;
     public TimeController timeCon;
 
     [Header("State variables")]
@@ -26,6 +27,7 @@ public class AnimalManager : MonoBehaviour
         timeCon = FindObjectOfType<TimeController>();
         navigation.Init(this);  
         diet.Init(this);
+        sleep.Init(this);
     }
 
     private void Update()
@@ -53,6 +55,7 @@ public class AnimalManager : MonoBehaviour
     {
         diet.FindWater();
         diet.FindFood();
+        //Spot predators
     }
 
     public float GetDistance(Vector3 destination)

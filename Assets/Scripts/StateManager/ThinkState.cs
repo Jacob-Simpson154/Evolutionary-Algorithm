@@ -8,9 +8,11 @@ public class ThinkState : State
     public State eatState;
     public State drinkState;
     public State searchState;
+    public State sleepState;
 
     public override State RunCurrentState(AnimalManager manager)
     {
+        //Thirsty and can see water
         if (manager.diet.IsThirsty() && manager.diet.CanSeeConsumable(0))
         {
             if (manager.state_target == null)
@@ -34,6 +36,7 @@ public class ThinkState : State
 
         else
 
+        //Thirsty and cannot see water
         if (manager.diet.IsThirsty() && !manager.diet.CanSeeConsumable(0))
         {
             return searchState;
@@ -41,6 +44,7 @@ public class ThinkState : State
 
         else
 
+        //Hungry and can see food
         if (manager.diet.IsHungry() && manager.diet.CanSeeConsumable(1))
         {
             if (manager.state_target == null)
@@ -64,11 +68,19 @@ public class ThinkState : State
 
         else
 
+        //Hungry and cannot see food
         if (manager.diet.IsHungry() && !manager.diet.CanSeeConsumable(1))
         {
             return searchState;
         }
 
+        else
+
+        //Sleep during night
+        if(manager.sleep.NeedSleep() && !manager.timeCon.IsDay())
+        {
+            return sleepState;
+        }
         
 
         return searchState;
