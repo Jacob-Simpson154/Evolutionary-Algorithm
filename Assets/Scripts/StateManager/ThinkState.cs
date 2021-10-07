@@ -9,6 +9,7 @@ public class ThinkState : State
     public State drinkState;
     public State searchState;
     public State sleepState;
+    public State mateState;
 
     public override State RunCurrentState(AnimalManager manager)
     {
@@ -80,6 +81,30 @@ public class ThinkState : State
         if(manager.sleep.NeedSleep() && !manager.timeCon.IsDay())
         {
             return sleepState;
+        }
+
+        else
+
+        if(manager.mating.HasMates())
+        {
+            if(manager.state_target == null)
+            {
+                Transform destination = manager.mating.GetClosestMate();
+                manager.state_target = destination;
+                if(destination!=null)
+                {
+                    manager.navigation.CreatePathToTarget(manager.transform.position, destination.position);
+                    manager.shouldUpdatePath = true;
+                    return moveState;
+                }
+            }
+
+            else
+
+            if(manager.movement_path.Count == 0)
+            {
+                return mateState;
+            }
         }
         
 

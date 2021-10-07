@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimalBaseClass : MonoBehaviour
 {
     public Sex sex;
-    public animalType species = animalType.rabbit;
+    public Species species = Species.rabbit;
 
     [Header("Status")]
     public bool isDead = false;

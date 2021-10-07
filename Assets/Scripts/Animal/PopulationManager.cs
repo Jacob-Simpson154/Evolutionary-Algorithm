@@ -36,7 +36,7 @@ public class PopulationManager : MonoBehaviour
                 float lifeExpectancyMin = Random.Range(item.expectedLifetimeMinVariationMin, item.expectedLifetimeMinVariationMax);
                 float lifeExpectancyMax = Random.Range(item.expectedLifetimeMaxVariationMin, item.expectedLifetimeMaxVariationMax);
 
-                if (item.species == animalType.rabbit)
+                if (item.species == Species.rabbit)
                 {
                     RabbitClass rabbitClass = animal.GetComponent<RabbitClass>();
                     RabbitGenetics genetics = rabbitClass.genes;

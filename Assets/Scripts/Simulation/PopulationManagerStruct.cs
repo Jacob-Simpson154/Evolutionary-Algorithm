@@ -8,7 +8,7 @@ public struct PopulationManagerStruct
 {
     public int populationAmount;
     public GameObject animal;
-    public animalType species;
+    public Species species;
 
     [Header("Size genetic variation")]
     [Range(0, 1)]
@@ -77,7 +77,7 @@ public struct PopulationManagerStruct
     public float expectedLifetimeMaxVariationMax;
 }
 
-public enum animalType
+public enum Species
 {
     rabbit, NotImplemented, 
 }

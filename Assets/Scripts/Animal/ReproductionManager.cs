@@ -23,7 +23,7 @@ public class ReproductionManager : MonoBehaviour
     public void Crossover(Transform parent1, Transform parent2)
     {
 
-        if(parent1.GetComponent<AnimalBaseClass>().species == animalType.rabbit)
+        if(parent1.GetComponent<AnimalBaseClass>().species == Species.rabbit)
         {
             RabbitGenetics genesA = parent1.GetComponentInChildren<RabbitClass>().genes;
             RabbitGenetics genesB = parent2.GetComponentInChildren<RabbitClass>().genes;
