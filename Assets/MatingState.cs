@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class MatingState : State
 {
+    [SerializeField] ThinkState thinkState;
+
     public override State RunCurrentState(AnimalManager manager)
     {
-
-        return this;
+        manager.state_target.GetComponent<AnimalManager>().mating.Mate(manager);
+        manager.mating.Mate(manager.state_target.GetComponent<AnimalManager>());
+        return thinkState;
     }
 }

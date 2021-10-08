@@ -10,6 +10,7 @@ public class ThinkState : State
     public State searchState;
     public State sleepState;
     public State mateState;
+    public State idleState;
 
     public override State RunCurrentState(AnimalManager manager)
     {
@@ -93,6 +94,7 @@ public class ThinkState : State
                 manager.state_target = destination;
                 if(destination!=null)
                 {
+                    destination.GetComponent<AnimalManager>().mating.AlertedOfMate();
                     manager.navigation.CreatePathToTarget(manager.transform.position, destination.position);
                     manager.shouldUpdatePath = true;
                     return moveState;

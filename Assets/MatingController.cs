@@ -7,10 +7,13 @@ public class MatingController : MonoBehaviour
     AnimalManager manager;
 
     public List<AnimalManager> visibleMates;
-
-    bool isPregnant = false;
-
     [SerializeField] LayerMask mask;
+
+    [Header("Gestation")]
+    [SerializeField] bool isPregnant = false;
+    [SerializeField] float gestestationProgress = 0.0f;
+    [SerializeField] float gestationPeriodInDays = 0.0f;
+
 
     public void Init(AnimalManager m)
     {
@@ -25,7 +28,7 @@ public class MatingController : MonoBehaviour
         foreach (Collider item in animalsInArea)
         {
             AnimalManager inspectedItem = item.GetComponentInParent<AnimalManager>();
-            if (inspectedItem.identity.GetSpecies() == manager.identity.GetSpecies() && inspectedItem.identity.GetSex() != manager.identity.GetSex())
+            if (inspectedItem.identity.GetSpecies() == manager.identity.GetSpecies() && inspectedItem.identity.GetSex() != manager.identity.GetSex() && inspectedItem.mating.isPregnant == false && manager.mating.isPregnant ==false)
             {
                 if (!visibleMates.Contains(inspectedItem))
                 {
@@ -77,5 +80,38 @@ public class MatingController : MonoBehaviour
         if (visibleMates.Count > 0)
             return true;
         else return false;
+    }
+
+    public void Mate(AnimalManager other)
+    {
+        if(manager.identity.GetSex() == Sex.Female)
+        {
+            isPregnant = true;
+        }
+
+        manager.state_target = null;
+        manager.currentState = manager.thinkState;
+    }
+
+    private void Update()
+    {
+        if(isPregnant == true)
+        {
+            gestestationProgress += manager.timeCon.GetDayTimer();
+            if(gestestationProgress>=gestationPeriodInDays)
+            {
+                gestestationProgress = 0.0f;
+                isPregnant = false;
+
+                //Spawn baby
+            }
+        }
+    }
+
+
+    public void AlertedOfMate()
+    {
+        manager.currentState = manager.thinkState.idleState;
+        //Pause for mate
     }
 }

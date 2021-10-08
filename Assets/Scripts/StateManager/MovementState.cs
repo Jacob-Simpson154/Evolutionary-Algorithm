@@ -24,6 +24,7 @@ public class MovementState : State
             return this;
         }
 
+        manager.shouldUpdatePath = false;
         return thinkState;
     }
 }

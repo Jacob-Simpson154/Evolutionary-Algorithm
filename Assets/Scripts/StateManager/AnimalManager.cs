@@ -5,7 +5,8 @@ using UnityEngine;
 public class AnimalManager : MonoBehaviour
 {
     [Header("State")]
-    [SerializeField] State currentState;
+    public State currentState;
+    public ThinkState thinkState;
     
     [Header("Requirements")]
     public Astar navigation;
@@ -19,6 +20,8 @@ public class AnimalManager : MonoBehaviour
     public Transform state_target;
     public List<Vector3> movement_path = new List<Vector3>();
     public bool shouldUpdatePath = false;
+    [SerializeField] float refreshTimer = 0;
+    [SerializeField] float refreshInterval = 0.5f;
 
     [Header("Genetics - Eyesight")]
     public float eyeSightRange = 10.0f;
@@ -75,7 +78,13 @@ public class AnimalManager : MonoBehaviour
     {
         if(shouldUpdatePath == true)
         {
-
+            refreshTimer += Time.deltaTime;
+            if (refreshTimer >= refreshInterval)
+            {
+                refreshTimer = 0;
+                navigation.CreatePathToTarget(transform.position, state_target.position);
+            }
         }
     }
+
 }
