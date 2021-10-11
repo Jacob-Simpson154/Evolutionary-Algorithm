@@ -86,14 +86,14 @@ public class ThinkState : State
 
         else
 
-        if(manager.mating.HasMates())
+        if(manager.mating.HasMates() && manager.mating.isPregnant==false)
         {
             if(manager.state_target == null)
             {
                 Transform destination = manager.mating.GetClosestMate();
-                manager.state_target = destination;
                 if(destination!=null)
                 {
+                    manager.state_target = destination;
                     destination.GetComponent<AnimalManager>().mating.AlertedOfMate();
                     manager.navigation.CreatePathToTarget(manager.transform.position, destination.position);
                     manager.shouldUpdatePath = true;

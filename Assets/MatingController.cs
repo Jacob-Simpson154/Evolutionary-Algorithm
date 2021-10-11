@@ -10,7 +10,7 @@ public class MatingController : MonoBehaviour
     [SerializeField] LayerMask mask;
 
     [Header("Gestation")]
-    [SerializeField] bool isPregnant = false;
+    public bool isPregnant = false;
     [SerializeField] float gestestationProgress = 0.0f;
     [SerializeField] float gestationPeriodInDays = 0.0f;
 
@@ -91,6 +91,8 @@ public class MatingController : MonoBehaviour
 
         manager.state_target = null;
         manager.currentState = manager.thinkState;
+
+        Debug.Log(manager.gameObject.name + " just mated");
     }
 
     private void Update()
@@ -103,7 +105,10 @@ public class MatingController : MonoBehaviour
                 gestestationProgress = 0.0f;
                 isPregnant = false;
 
-                //Spawn baby
+                //This should plug into genetic algorithm
+                GameObject go = Instantiate(manager.gameObject);
+                go.transform.position = transform.position;
+                go.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
             }
         }
     }
@@ -112,6 +117,5 @@ public class MatingController : MonoBehaviour
     public void AlertedOfMate()
     {
         manager.currentState = manager.thinkState.idleState;
-        //Pause for mate
     }
 }

@@ -8,8 +8,16 @@ public class MatingState : State
 
     public override State RunCurrentState(AnimalManager manager)
     {
-        manager.state_target.GetComponent<AnimalManager>().mating.Mate(manager);
-        manager.mating.Mate(manager.state_target.GetComponent<AnimalManager>());
+        AnimalManager partnersManager = manager.state_target.GetComponent<AnimalManager>();
+
+        if (partnersManager != null)
+        {
+            //Complete this sides part
+            manager.mating.Mate(partnersManager);
+            //Complete partners side
+            partnersManager.mating.Mate(manager);
+        }
+
         return thinkState;
     }
 }
