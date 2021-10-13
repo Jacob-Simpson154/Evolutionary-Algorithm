@@ -80,16 +80,14 @@ public class Rabbit_Gene_Life : GeneBase
         else return 0;
     }
 
-    public override void ApplyGeneticInformation(Transform parent)
+    public override void ApplyGeneticInformation(AnimalManager manager)
     {
-        AnimalBaseClass rabbit = parent.GetComponent<AnimalBaseClass>();
-
-        if(rabbit.sex == Sex.Female)
+        if(manager.identity.GetSex() == Sex.Female)
         {
-            rabbit.ageOfMaturityInDays = Random.Range(maturityMinFemale, maturityMaxFemale);
+            manager.ageOfMaturityInDays = Random.Range(maturityMinFemale, maturityMaxFemale);
         }
-        else rabbit.ageOfMaturityInDays = Random.Range(maturityMinMale, maturityMaxMale);
+        else manager.ageOfMaturityInDays = Random.Range(maturityMinMale, maturityMaxMale);
 
-        rabbit.ageOfDeathInDays = Random.Range(expectedLifetimeMin, expectedLifetimeMax);
+        manager.ageOfDeathInDays = Random.Range(expectedLifetimeMin, expectedLifetimeMax);
     }
 }

@@ -7,13 +7,15 @@ public class AnimalManager : MonoBehaviour
     [Header("State")]
     public State currentState;
     public ThinkState thinkState;
-    
+
     [Header("Requirements")]
+    public bool hasInitialised = false;
     public Astar navigation;
     public DietController diet;
     public SleepController sleep;
     public IdentityController identity;
     public MatingController mating;
+    public Chromosome chromosomes;
     public TimeController timeCon;
 
     [Header("State variables")]
@@ -23,19 +25,43 @@ public class AnimalManager : MonoBehaviour
     [SerializeField] float refreshTimer = 0;
     [SerializeField] float refreshInterval = 0.5f;
 
+    [Header("Genetics - Size")]
+    public Vector3 sizeMature;
+    public Vector3 sizeIncreaseByDay;
+
     [Header("Genetics - Eyesight")]
     public float eyeSightRange = 10.0f;
     public float eyeSightAngle = 10.0f;
 
+    [Header("Genetics - Life")]
+    public float ageOfMaturityInDays;
+    public float ageOfDeathInDays;
 
     private void Start()
     {
+        if (hasInitialised == false)
+            Init();
+    }
+
+    void Init()
+    {
+        hasInitialised = true;
         timeCon = FindObjectOfType<TimeController>();
         navigation.Init(this);  
         diet.Init(this);
         sleep.Init(this);
         identity.Init(this);
         mating.Init(this);
+        chromosomes.Init(this);
+    }
+
+    public void ApplyChromosome()
+    {
+        if(hasInitialised==false)
+        {
+            Init();
+        }
+        chromosomes.Activate();
     }
 
     private void Update()

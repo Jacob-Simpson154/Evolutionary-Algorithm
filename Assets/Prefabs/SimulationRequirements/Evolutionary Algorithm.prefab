@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   population:
-  - populationAmount: 20
-    animal: {fileID: 5771034554858761595, guid: 6b9d1aa30d9b3b340a7492d909a4ea69,
+  - populationAmount: 5
+    animal: {fileID: 5771034554858761595, guid: 4c9a24ffe2f31a44fae0680602fd2e05,
       type: 3}
     species: 0
     sizeVariationMin: 0.86
@@ -84,4 +84,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1654b50e6d2ce642bd2f0f49ae49daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mutationChance: 3
+  mutationChance: 0.3

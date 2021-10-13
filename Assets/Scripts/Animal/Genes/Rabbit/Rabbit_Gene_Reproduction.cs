@@ -7,7 +7,7 @@ public class Rabbit_Gene_Reproduction : GeneBase
     float reproductionChance = 80.0f;
     bool infertile = false;
 
-    public override void ApplyGeneticInformation(Transform parent)
+    public override void ApplyGeneticInformation(AnimalManager manager)
     {
         
     }

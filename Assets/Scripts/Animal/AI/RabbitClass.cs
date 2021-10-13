@@ -12,11 +12,11 @@ public class RabbitClass : AnimalBaseClass
     public LayerMask predatorMask;
     public override void Activate()
     {
-        genes.size.ApplyGeneticInformation(transform);
-        genes.fur.ApplyGeneticInformation(transform);
-        genes.speed.ApplyGeneticInformation(transform);
-        genes.eyesight.ApplyGeneticInformation(transform);
-        genes.lifeExpectancy.ApplyGeneticInformation(transform);
+        //genes.size.ApplyGeneticInformation(transform);
+        //genes.fur.ApplyGeneticInformation(transform);
+        //genes.speed.ApplyGeneticInformation(transform);
+        //genes.eyesight.ApplyGeneticInformation(transform);
+        //genes.lifeExpectancy.ApplyGeneticInformation(transform);
 
         timeController = FindObjectOfType<TimeController>();
         timeController.AddDailyListener(AgeUpByDay);

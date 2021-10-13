@@ -28,11 +28,10 @@ public class Rabbit_Gene_Eyesight : GeneBase
             eyeSightFOV = 360;
     }
 
-    public override void ApplyGeneticInformation(Transform parent)
+    public override void ApplyGeneticInformation(AnimalManager manager)
     {
-        RabbitClass rc = parent.GetComponent<RabbitClass>();
-        rc.eyeSightRange = eyeSightRange;
-        rc.eyeSightAngle = eyeSightFOV;
+        manager.eyeSightRange = eyeSightRange;
+        manager.eyeSightAngle = eyeSightFOV;
     }
 
     public override float GetGene(int i)

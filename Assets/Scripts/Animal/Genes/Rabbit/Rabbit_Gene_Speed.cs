@@ -18,9 +18,9 @@ public class Rabbit_Gene_Speed : GeneBase
     }
 
 
-    public override void ApplyGeneticInformation(Transform parent)
+    public override void ApplyGeneticInformation(AnimalManager manager)
     {
-        base.ApplyGeneticInformation(parent);
+        manager.GetComponentInChildren<MovementState>().speed = speed;
     }
 
     public override float GetGene()

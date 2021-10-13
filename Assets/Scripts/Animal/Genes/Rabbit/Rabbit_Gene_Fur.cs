@@ -20,9 +20,9 @@ public class Rabbit_Gene_Fur : GeneBase
         length = len;
     }
 
-    public override void ApplyGeneticInformation(Transform parent)
+    public override void ApplyGeneticInformation(AnimalManager manager)
     {
-        parent.GetComponent<Renderer>().material.color = colour;
+        manager.GetComponent<Renderer>().material.color = colour;
     }
 
     public override float GetGene(int i)

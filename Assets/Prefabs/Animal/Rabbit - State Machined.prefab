@@ -411,8 +411,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thinkState: {fileID: 7211966659746050659}
-  timer: 0
-  timeToConsume: 30
 --- !u!1 &884543052231298999
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,8 +738,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5771034554307059197}
+  - component: {fileID: 2170419117671307849}
   m_Layer: 0
-  m_Name: Gene
+  m_Name: Chromosomes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,6 +766,25 @@ Transform:
   m_Father: {fileID: 5771034554858761606}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2170419117671307849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5771034554307059186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58f157aa7d9a774aa76fb7bf4307ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genes:
+  - {fileID: 5771034553233569768}
+  - {fileID: 5771034553884703354}
+  - {fileID: 1690887389}
+  - {fileID: 5771034554657338834}
+  - {fileID: 653326513}
+  - {fileID: 4578033269657940261}
 --- !u!1 &5771034554657338835
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +946,7 @@ MonoBehaviour:
   sleep: {fileID: 1475220086}
   identity: {fileID: 1288145266}
   mating: {fileID: 179389385}
+  chromosomes: {fileID: 2170419117671307849}
   timeCon: {fileID: 0}
   state_target: {fileID: 0}
   movement_path: []
@@ -1104,5 +1123,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thinkState: {fileID: 7211966659746050659}
-  timer: 0
-  timeToConsume: 30

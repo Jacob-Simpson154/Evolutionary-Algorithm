@@ -21,7 +21,7 @@ public class GeneBase : MonoBehaviour
     /// <summary>
     /// Used after animal is created.
     /// </summary>
-    public virtual void ApplyGeneticInformation(Transform parent)
+    public virtual void ApplyGeneticInformation(AnimalManager manager)
     {
 
     }

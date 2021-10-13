@@ -28,4 +28,14 @@ public class IdentityController : MonoBehaviour
     {
         return sex;
     }
+
+    public Sex DetermineSex()
+    {
+        float randomValue = Random.Range(0.0f, 1.0f);
+        if (randomValue < 0.5f)
+            sex = Sex.Female;
+        else sex = Sex.Male;
+
+        return sex;
+    }
 }

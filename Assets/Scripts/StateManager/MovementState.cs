@@ -6,7 +6,7 @@ public class MovementState : State
 {
     [SerializeField] State thinkState;
     [SerializeField] Vector3 positionOffset = Vector3.up;
-    [SerializeField] float speed = 2.0f;
+    public float speed = 100.0f;
 
 
     public override State RunCurrentState(AnimalManager manager)
