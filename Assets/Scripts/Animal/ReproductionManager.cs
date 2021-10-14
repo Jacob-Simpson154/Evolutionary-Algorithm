@@ -6,6 +6,7 @@ using System;
 public class ReproductionManager : MonoBehaviour
 {
     [SerializeField] float mutationChance = 0.1f;
+    [SerializeField] GameObject rabbit;
 
 
 
@@ -23,67 +24,71 @@ public class ReproductionManager : MonoBehaviour
     public void Crossover(Transform parent1, Transform parent2)
     {
 
-        if(parent1.GetComponent<AnimalBaseClass>().species == Species.rabbit)
+        if(parent1.GetComponent<AnimalManager>().identity.GetSpecies() == Species.rabbit)
         {
-            RabbitGenetics genesA = parent1.GetComponentInChildren<RabbitClass>().genes;
-            RabbitGenetics genesB = parent2.GetComponentInChildren<RabbitClass>().genes;
+            Chromosome genesA = parent1.GetComponentInChildren<AnimalManager>().chromosomes;
+            Chromosome genesB = parent2.GetComponentInChildren<AnimalManager>().chromosomes;
 
             //Mix genetics////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            float offspring_Size_X = TwoPointPrecision(genesA.size.GetGene(0), genesB.size.GetGene(0));
+            float offspring_Size_X = TwoPointPrecision(genesA.genes[0].GetGene(0), genesB.genes[0].GetGene(0));
             offspring_Size_X = ShouldMutate() ? Mutate(offspring_Size_X): offspring_Size_X;
-            float offspring_Size_Y = TwoPointPrecision(genesA.size.GetGene(1), genesB.size.GetGene(1));
+            float offspring_Size_Y = TwoPointPrecision(genesA.genes[0].GetGene(1), genesB.genes[0].GetGene(1));
             offspring_Size_Y = ShouldMutate() ? Mutate(offspring_Size_Y) : offspring_Size_Y;
-            float offspring_Size_Z = TwoPointPrecision(genesA.size.GetGene(2), genesB.size.GetGene(2));
+            float offspring_Size_Z = TwoPointPrecision(genesA.genes[0].GetGene(2), genesB.genes[0].GetGene(2));
             offspring_Size_Z = ShouldMutate() ? Mutate(offspring_Size_Z) : offspring_Size_Z;
 
-            float offspring_ColourRed = TwoPointPrecision(genesA.fur.GetGene(0), genesB.fur.GetGene(0));
+            float offspring_ColourRed = TwoPointPrecision(genesA.genes[1].GetGene(0), genesB.genes[1].GetGene(0));
             offspring_ColourRed = ShouldMutate() ? Mutate(offspring_ColourRed) : offspring_ColourRed;
-            float offspring_ColourGreen = TwoPointPrecision(genesA.fur.GetGene(1), genesB.fur.GetGene(1));
+            float offspring_ColourGreen = TwoPointPrecision(genesA.genes[1].GetGene(1), genesB.genes[1].GetGene(1));
             offspring_ColourGreen = ShouldMutate() ? Mutate(offspring_ColourGreen) : offspring_ColourGreen;
-            float offspring_ColourBlue = TwoPointPrecision(genesA.fur.GetGene(2), genesB.fur.GetGene(2));
+            float offspring_ColourBlue = TwoPointPrecision(genesA.genes[1].GetGene(2), genesB.genes[1].GetGene(2));
             offspring_ColourBlue = ShouldMutate() ? Mutate(offspring_ColourBlue) : offspring_ColourBlue;
 
-            float offspring_Speed = TwoPointPrecision(genesA.speed.GetGene(), genesB.speed.GetGene());
+            float offspring_Speed = TwoPointPrecision(genesA.genes[2].GetGene(), genesB.genes[2].GetGene());
             offspring_Speed = ShouldMutate() ? Mutate(offspring_Speed) : offspring_Speed;
 
-            float offspring_EyesightRange = TwoPointPrecision(genesA.eyesight.GetGene(0), genesB.eyesight.GetGene(0));
+            float offspring_EyesightRange = TwoPointPrecision(genesA.genes[3].GetGene(0), genesB.genes[3].GetGene(0));
             offspring_EyesightRange = ShouldMutate() ? Mutate(offspring_EyesightRange) : offspring_EyesightRange;
-            float offspring_EyesightFOV = TwoPointPrecision(genesA.eyesight.GetGene(1), genesB.eyesight.GetGene(1));
+            float offspring_EyesightFOV = TwoPointPrecision(genesA.genes[3].GetGene(1), genesB.genes[3].GetGene(1));
             offspring_EyesightFOV = ShouldMutate() ? Mutate(offspring_EyesightFOV) : offspring_EyesightFOV;
 
 
-            float offspring_MaturityMaleMin = TwoPointPrecision(genesA.lifeExpectancy.GetGene(0), genesB.lifeExpectancy.GetGene(0));
+            float offspring_MaturityMaleMin = TwoPointPrecision(genesA.genes[4].GetGene(0), genesB.genes[4].GetGene(0));
             offspring_MaturityMaleMin = ShouldMutate() ? Mutate(offspring_MaturityMaleMin) : offspring_MaturityMaleMin;
-            float offspring_MaturityMaleMax = TwoPointPrecision(genesA.lifeExpectancy.GetGene(1), genesB.lifeExpectancy.GetGene(1));
+            float offspring_MaturityMaleMax = TwoPointPrecision(genesA.genes[4].GetGene(1), genesB.genes[4].GetGene(1));
             offspring_MaturityMaleMax = ShouldMutate() ? Mutate(offspring_MaturityMaleMax) : offspring_MaturityMaleMax;
             
-            float offspring_MaturityFemaleMin = TwoPointPrecision(genesA.lifeExpectancy.GetGene(2), genesB.lifeExpectancy.GetGene(2));
+            float offspring_MaturityFemaleMin = TwoPointPrecision(genesA.genes[4].GetGene(2), genesB.genes[4].GetGene(2));
             offspring_MaturityFemaleMin = ShouldMutate() ? Mutate(offspring_MaturityFemaleMin) : offspring_MaturityFemaleMin;
-            float offspring_MaturityFemaleMax = TwoPointPrecision(genesA.lifeExpectancy.GetGene(3), genesB.lifeExpectancy.GetGene(3));
+            float offspring_MaturityFemaleMax = TwoPointPrecision(genesA.genes[4].GetGene(3), genesB.genes[4].GetGene(3));
             offspring_MaturityFemaleMax = ShouldMutate() ? Mutate(offspring_MaturityFemaleMax) : offspring_MaturityFemaleMax;
             
-            float offspring_LifetimeMin = TwoPointPrecision(genesA.lifeExpectancy.GetGene(4), genesB.lifeExpectancy.GetGene(4));
+            float offspring_LifetimeMin = TwoPointPrecision(genesA.genes[4].GetGene(4), genesB.genes[4].GetGene(4));
             offspring_LifetimeMin = ShouldMutate() ? Mutate(offspring_LifetimeMin) : offspring_LifetimeMin;
-            float offspring_LifetimeMax = TwoPointPrecision(genesA.lifeExpectancy.GetGene(5), genesB.lifeExpectancy.GetGene(5));
+            float offspring_LifetimeMax = TwoPointPrecision(genesA.genes[4].GetGene(5), genesB.genes[4].GetGene(5));
             offspring_LifetimeMax = ShouldMutate() ? Mutate(offspring_LifetimeMax) : offspring_LifetimeMax;
 
 
             //Create animal and apply genes////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            GameObject animal = Instantiate(parent1.gameObject);
-            animal.transform.position = parent1.transform.position + transform.forward * 5;
+            GameObject animal = Instantiate(rabbit, transform);
+            animal.transform.position = parent1.position;
 
-            RabbitClass rabbitClass = animal.GetComponent<RabbitClass>();
-            RabbitGenetics genesC = rabbitClass.genes;
+            AnimalManager rabbitClass = animal.GetComponent<AnimalManager>();
+            rabbitClass.currentState = rabbitClass.thinkState;
+            rabbitClass.movement_path.Clear();
+            rabbitClass.state_target = null;
 
-            genesC.size.GetComponent<Rabbit_Gene_Size>().Creation(new Vector3(offspring_Size_X, offspring_Size_Y, offspring_Size_Z));
-            genesC.speed.Creation(offspring_Speed);
-            genesC.eyesight.GetComponent<Rabbit_Gene_Eyesight>().Creation(offspring_EyesightRange, offspring_EyesightFOV);
-            genesC.fur.GetComponent<Rabbit_Gene_Fur>().Creation(new Color(offspring_ColourRed, offspring_ColourGreen, offspring_ColourBlue), 0);
-            genesC.lifeExpectancy.GetComponent<Rabbit_Gene_Life>().Creation(rabbitClass.DetermineSex(), offspring_MaturityMaleMin, offspring_MaturityMaleMax, offspring_MaturityFemaleMin, offspring_MaturityFemaleMax, offspring_LifetimeMin, offspring_LifetimeMax);
+            Chromosome genesC = rabbitClass.chromosomes;
 
-            rabbitClass.Activate();
+            genesC.genes[0].GetComponent<Rabbit_Gene_Size>().Creation(new Vector3(offspring_Size_X, offspring_Size_Y, offspring_Size_Z));
+            genesC.genes[1].GetComponent<Rabbit_Gene_Fur>().Creation(new Color(offspring_ColourRed, offspring_ColourGreen, offspring_ColourBlue), 0);
+            genesC.genes[2].Creation(offspring_Speed);
+            genesC.genes[3].GetComponent<Rabbit_Gene_Eyesight>().Creation(offspring_EyesightRange, offspring_EyesightFOV);
+            genesC.genes[4].GetComponent<Rabbit_Gene_Life>().Creation(rabbitClass.GetComponentInChildren<IdentityController>().DetermineSex(), offspring_MaturityMaleMin, offspring_MaturityMaleMax, offspring_MaturityFemaleMin, offspring_MaturityFemaleMax, offspring_LifetimeMin, offspring_LifetimeMax);
+
+            rabbitClass.ApplyChromosome();
         }
     }
 

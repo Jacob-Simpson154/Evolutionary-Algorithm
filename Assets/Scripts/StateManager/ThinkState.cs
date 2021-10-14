@@ -10,7 +10,6 @@ public class ThinkState : State
     public State searchState;
     public State sleepState;
     public State mateState;
-    public State idleState;
 
     public override State RunCurrentState(AnimalManager manager)
     {

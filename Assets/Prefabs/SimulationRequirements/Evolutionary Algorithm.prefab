@@ -85,3 +85,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mutationChance: 0.3
+  rabbit: {fileID: 5771034554858761595, guid: 4c9a24ffe2f31a44fae0680602fd2e05, type: 3}

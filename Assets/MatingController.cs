@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MatingController : MonoBehaviour
 {
-    AnimalManager manager;
+    [SerializeField] AnimalManager manager;
 
     public List<AnimalManager> visibleMates;
     [SerializeField] LayerMask mask;
@@ -13,6 +13,7 @@ public class MatingController : MonoBehaviour
     public bool isPregnant = false;
     [SerializeField] float gestestationProgress = 0.0f;
     [SerializeField] float gestationPeriodInDays = 0.0f;
+    AnimalManager otherMate;
 
 
     public void Init(AnimalManager m)
@@ -25,6 +26,8 @@ public class MatingController : MonoBehaviour
         visibleMates.Clear();
 
         Collider[] animalsInArea = Physics.OverlapSphere(transform.position, manager.eyeSightRange, mask);
+        if (animalsInArea.Length == 0)
+            return false;
         foreach (Collider item in animalsInArea)
         {
             AnimalManager inspectedItem = item.GetComponentInParent<AnimalManager>();
@@ -87,10 +90,12 @@ public class MatingController : MonoBehaviour
         if(manager.identity.GetSex() == Sex.Female)
         {
             isPregnant = true;
+            otherMate = other;
         }
 
         manager.state_target = null;
         manager.currentState = manager.thinkState;
+        manager.thinkState.mateState.GetComponent<MatingState>().StopWaiting();
 
         Debug.Log(manager.gameObject.name + " just mated");
     }
@@ -106,9 +111,10 @@ public class MatingController : MonoBehaviour
                 isPregnant = false;
 
                 //This should plug into genetic algorithm
-                GameObject go = Instantiate(manager.gameObject);
-                go.transform.position = transform.position;
-                go.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                if (manager.identity.GetSex() == Sex.Female)
+                {
+                    FindObjectOfType<ReproductionManager>().Crossover(manager.transform, otherMate.transform);
+                }
             }
         }
     }
@@ -116,6 +122,6 @@ public class MatingController : MonoBehaviour
 
     public void AlertedOfMate()
     {
-        manager.currentState = manager.thinkState.idleState;
+        manager.currentState = manager.thinkState.mateState;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DietController : MonoBehaviour
 {
-    AnimalManager manager;
+    [SerializeField] AnimalManager manager;
 
     [Header("Diet")]
     public List<ConsumableController> visibleFood = new List<ConsumableController>();
@@ -58,6 +58,8 @@ public class DietController : MonoBehaviour
         visibleWater.Clear();
 
         Collider[] waterInArea = Physics.OverlapSphere(transform.position, manager.eyeSightRange, consumableMask);
+        if (waterInArea.Length == 0)
+            return false;
         foreach (Collider item in waterInArea)
         {
             ConsumableController inspectedItem = item.GetComponentInParent<ConsumableController>();
@@ -92,6 +94,8 @@ public class DietController : MonoBehaviour
         visibleFood.Clear();
 
         Collider[] foodInArea = Physics.OverlapSphere(transform.position, manager.eyeSightRange, consumableMask);
+        if (foodInArea.Length == 0)
+            return false;
         foreach (Collider item in foodInArea)
         {
             ConsumableController inspectedItem = item.GetComponentInParent<ConsumableController>();

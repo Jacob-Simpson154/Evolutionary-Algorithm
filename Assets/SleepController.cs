@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SleepController : MonoBehaviour
 {
-    AnimalManager manager;
+    [SerializeField] AnimalManager manager;
 
     [SerializeField] float currentSleep = 0.0f;
     [SerializeField] float averageSleepPerDayInHours = 8.0f;

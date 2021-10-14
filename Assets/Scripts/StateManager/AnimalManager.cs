@@ -102,7 +102,7 @@ public class AnimalManager : MonoBehaviour
 
     public void UpdatePath()
     {
-        if(shouldUpdatePath == true)
+        if(shouldUpdatePath == true && state_target!=null)
         {
             refreshTimer += Time.deltaTime;
             if (refreshTimer >= refreshInterval)
