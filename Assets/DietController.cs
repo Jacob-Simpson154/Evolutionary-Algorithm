@@ -15,6 +15,12 @@ public class DietController : MonoBehaviour
     public float food = 0;
     public float water = 0;
 
+    [Header("Malnourishment")]
+    public float daysWithoutWater = 0;
+    public float daysUntilDehydrationDeath = 3;
+    public float daysWithoutFood = 0;
+    public float daysUntilStarvingDeath = 10;
+
     [Header("Daily requirements")]
     public float foodConsumedPerDay = 2000;
     public float waterConsumedPerDay = 2000;
@@ -37,6 +43,24 @@ public class DietController : MonoBehaviour
         float t = manager.timeCon.GetDayTimer();
         food -= foodConsumedPerDay*t;
         water -= waterConsumedPerDay*t;
+
+        if(IsDehydrated())
+        {
+            daysWithoutWater += t;
+            if(daysWithoutWater>=daysUntilDehydrationDeath)
+            {
+                Destroy(manager.gameObject);
+            }
+        }
+
+        if (IsStarving())
+        {
+            daysWithoutFood += t;
+            if (daysWithoutFood >= daysUntilStarvingDeath)
+            {
+                Destroy(manager.gameObject);
+            }
+        }
     }
 
     public bool IsThirsty()
@@ -46,11 +70,25 @@ public class DietController : MonoBehaviour
         return false;
     }
 
+    bool IsDehydrated()
+    {
+        if (water <= 0)
+            return true;
+        else return false;
+    }
+
     public bool IsHungry()
     {
         if(((food/foodConsumedPerDay)*100)<=hungry)
             return true;
         return false;
+    }
+
+    bool IsStarving()
+    {
+        if (food <= 0)
+            return true;
+        else return false;
     }
 
     public bool FindWater()
@@ -189,11 +227,15 @@ public class DietController : MonoBehaviour
     {
         float temp = water;
         water += item.hydrationAmount;
+        if (water > 0)
+            daysWithoutWater = 0;
         float difference = water - temp;
         item.hydrationAmount -= difference;
 
         temp = food;
         food += item.nutritionalAmount;
+        if (food > 0)
+            daysWithoutFood = 0;
         difference = food - temp;
         item.nutritionalAmount -= difference;
     }
