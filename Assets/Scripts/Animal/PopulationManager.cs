@@ -26,6 +26,8 @@ public class PopulationManager : MonoBehaviour
                 pos.x++;
 
                 float sizeMod = Random.Range(item.sizeVariationMin, item.sizeVariationMax);
+                float furLengthMod = Random.Range(item.lengthRangeMin, item.lengthRangeMax);
+                float furThicknessMod = Random.Range(item.thicknessRangeMin, item.thicknessRangeMax);
                 float speedMod = Random.Range(item.speedVariationMin, item.speedVariationMax);
                 float eyesightRangeMod = Random.Range(item.eyeSightRangeMin, item.eyeSightRangeMax);
                 float eyesightFOVMod = Random.Range(item.eyeSightFOVMin, item.eyeSightFOVMax);
@@ -42,7 +44,7 @@ public class PopulationManager : MonoBehaviour
                     Chromosome genetics = rabbitClass.chromosomes;
 
                     genetics.genes[0].Setup(sizeMod);
-                    genetics.genes[1].GetComponent<Rabbit_Gene_Fur>().Setup(item.colourRangeMin, item.colourRangeMax);
+                    genetics.genes[1].GetComponent<Rabbit_Gene_Fur>().Setup(item.colourRangeMin, item.colourRangeMax, furLengthMod, furThicknessMod);
                     genetics.genes[2].Setup(speedMod);
                     genetics.genes[3].GetComponent<Rabbit_Gene_Eyesight>().Setup(eyesightRangeMod, eyesightFOVMod);
 

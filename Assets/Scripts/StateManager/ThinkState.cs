@@ -85,7 +85,7 @@ public class ThinkState : State
 
         else
 
-        if(manager.mating.HasMates() && manager.mating.isPregnant==false)
+        if(manager.mating.HasMates() && manager.mating.isPregnant==false && manager.IsAdult())
         {
             if(manager.state_target == null)
             {

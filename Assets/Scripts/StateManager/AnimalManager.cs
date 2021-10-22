@@ -34,8 +34,12 @@ public class AnimalManager : MonoBehaviour
     public float eyeSightAngle = 10.0f;
 
     [Header("Genetics - Life")]
+    public float ageCurrent = 0.0f;
     public float ageOfMaturityInDays;
     public float ageOfDeathInDays;
+
+    [Header("Genetics - Fur")]
+    public float currentTemperature = 10.0f;
 
     private void Start()
     {
@@ -62,6 +66,8 @@ public class AnimalManager : MonoBehaviour
             Init();
         }
         chromosomes.Activate();
+
+        sizeIncreaseByDay = (sizeMature - transform.localScale) / ageOfMaturityInDays;
     }
 
     private void Update()
@@ -69,6 +75,7 @@ public class AnimalManager : MonoBehaviour
         UpdatePath();
         RunStateMachine();
         PerceiveEnvironment();
+        AgeUp();
     }
 
     //State controller
@@ -93,6 +100,50 @@ public class AnimalManager : MonoBehaviour
         diet.FindWater();
         diet.FindFood();
         mating.FindMates();
+        TemperatureCheck();
+    }
+
+    void AgeUp()
+    {
+        ageCurrent += timeCon.GetDayTimer();
+
+        if(ageCurrent <= ageOfMaturityInDays)
+            transform.localScale += sizeIncreaseByDay*timeCon.GetDayTimer();
+
+        if (ageCurrent>=ageOfDeathInDays)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    void TemperatureCheck()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, -transform.up, out hit, 2.0f))
+        {
+            if(hit.transform.GetComponent<TileController>())
+            {
+                TileController tc = hit.transform.GetComponent<TileController>();
+                float tcTemperature = tc.temperature;
+
+                if (tcTemperature + chromosomes.GetComponentInChildren<Rabbit_Gene_Fur>().length* chromosomes.GetComponentInChildren<Rabbit_Gene_Fur>().thickness > currentTemperature)
+                    currentTemperature += timeCon.GetDayTimer();
+                else if (tcTemperature + chromosomes.GetComponentInChildren<Rabbit_Gene_Fur>().length * chromosomes.GetComponentInChildren<Rabbit_Gene_Fur>().thickness < currentTemperature)
+                    currentTemperature -= timeCon.GetDayTimer();
+
+                if (currentTemperature < 0)
+                {
+                    Destroy(this.gameObject);
+                }
+            }
+        }
+    }
+
+    public bool IsAdult()
+    {
+        if (ageCurrent >= ageOfMaturityInDays)
+            return true;
+        else return false;
     }
 
     public float GetDistance(Vector3 destination)

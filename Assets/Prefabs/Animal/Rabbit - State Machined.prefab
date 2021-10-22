@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a9e7eeeee6d99478ce09d703a525b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   visibleMates: []
   mask:
     serializedVersion: 2
@@ -275,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c127fc8765102dc4baf857e123ae9727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   currentSleep: 0
   averageSleepPerDayInHours: 8
   timeWithoutSleep: 0
@@ -323,6 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thinkState: {fileID: 7211966659746050659}
+  waitingForMate: 0
 --- !u!1 &1690887387
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88f3be37d50e674fa2ef2dcbe03982b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 10
 --- !u!1 &633755164189271088
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdcab45af7a241344be97ca613e031da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   visibleFood: []
   visibleWater: []
   consumableMask:
@@ -461,6 +465,10 @@ MonoBehaviour:
     m_Bits: 256
   food: 2000
   water: 2000
+  daysWithoutWater: 0
+  daysUntilDehydrationDeath: 3
+  daysWithoutFood: 0
+  daysUntilStarvingDeath: 10
   foodConsumedPerDay: 2000
   waterConsumedPerDay: 2000
   hungry: 40
@@ -557,7 +565,6 @@ MonoBehaviour:
   searchState: {fileID: 1211102628}
   sleepState: {fileID: 1267416549}
   mateState: {fileID: 1587124864}
-  idleState: {fileID: 8511919970394132526}
 --- !u!1 &2747716456881954318
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   birthSize: {x: 0.1, y: 0.1, z: 0.1}
-  matureSize: {x: 1, y: 1, z: 1}
+  matureSize: {x: 0.3, y: 0.3, z: 0.3}
 --- !u!1 &5771034553884703352
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,7 +735,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colour: {r: 0.3207547, g: 0.101906836, b: 0, a: 0}
-  length: 0
+  length: 4
+  thickness: 1.2
 --- !u!1 &5771034554307059186
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: {fileID: 7211966659746050659}
   thinkState: {fileID: 7211966659746050659}
+  hasInitialised: 0
   navigation: {fileID: 2667959056124177218}
   diet: {fileID: 5475918928996497504}
   sleep: {fileID: 1475220086}
@@ -953,8 +962,14 @@ MonoBehaviour:
   shouldUpdatePath: 0
   refreshTimer: 0
   refreshInterval: 0.5
+  sizeMature: {x: 0, y: 0, z: 0}
+  sizeIncreaseByDay: {x: 0, y: 0, z: 0}
   eyeSightRange: 10
   eyeSightAngle: 360
+  ageCurrent: 0
+  ageOfMaturityInDays: 0
+  ageOfDeathInDays: 0
+  currentTemperature: 10
 --- !u!1 &6241093620401811192
 GameObject:
   m_ObjectHideFlags: 0

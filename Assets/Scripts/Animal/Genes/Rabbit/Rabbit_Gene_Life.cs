@@ -5,7 +5,6 @@ using UnityEngine;
 public class Rabbit_Gene_Life : GeneBase
 {
 
-
     //Maturity will determine how long it'll take for full size
     //in addition at what age they can reproduce
     //Male's reach maturity sooner

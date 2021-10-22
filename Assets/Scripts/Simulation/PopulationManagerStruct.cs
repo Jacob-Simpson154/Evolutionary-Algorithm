@@ -20,7 +20,19 @@ public struct PopulationManagerStruct
     [Range(0, 1)]
     public float colourRangeMin;
     [Range(1, 10)]
-    public float colourRangeMax;
+    public float colourRangeMax;    
+    
+    [Header("Fur length genetic variation")]
+    [Range(0, 1)]
+    public float lengthRangeMin;
+    [Range(1, 10)]
+    public float lengthRangeMax;   
+    
+    [Header("Fur thickness genetic variation")]
+    [Range(0, 1)]
+    public float thicknessRangeMin;
+    [Range(1, 10)]
+    public float thicknessRangeMax;
 
     [Header("Speed genetic variation")]
     [Range(0, 1)]

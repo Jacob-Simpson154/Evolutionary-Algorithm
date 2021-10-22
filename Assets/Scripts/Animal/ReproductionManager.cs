@@ -7,7 +7,12 @@ public class ReproductionManager : MonoBehaviour
 {
     [SerializeField] float mutationChance = 0.1f;
     [SerializeField] GameObject rabbit;
+    PopulationManager popManager;
 
+    private void Start()
+    {
+        popManager = GetComponent<PopulationManager>();
+    }
 
 
     public void Test(AnimalBaseClass a, AnimalBaseClass b)
@@ -44,6 +49,11 @@ public class ReproductionManager : MonoBehaviour
             offspring_ColourGreen = ShouldMutate() ? Mutate(offspring_ColourGreen) : offspring_ColourGreen;
             float offspring_ColourBlue = TwoPointPrecision(genesA.genes[1].GetGene(2), genesB.genes[1].GetGene(2));
             offspring_ColourBlue = ShouldMutate() ? Mutate(offspring_ColourBlue) : offspring_ColourBlue;
+
+            float offspring_FurLength = TwoPointPrecision(genesA.genes[1].GetGene(3), genesB.genes[1].GetGene(3));
+            offspring_FurLength = ShouldMutate() ? Mutate(offspring_FurLength) : offspring_FurLength;
+            float offspring_FurThickness = TwoPointPrecision(genesA.genes[1].GetGene(4), genesB.genes[1].GetGene(4));
+            offspring_FurThickness = ShouldMutate() ? Mutate(offspring_FurThickness) : offspring_FurThickness;
 
             float offspring_Speed = TwoPointPrecision(genesA.genes[2].GetGene(), genesB.genes[2].GetGene());
             offspring_Speed = ShouldMutate() ? Mutate(offspring_Speed) : offspring_Speed;
@@ -83,12 +93,14 @@ public class ReproductionManager : MonoBehaviour
             Chromosome genesC = rabbitClass.chromosomes;
 
             genesC.genes[0].GetComponent<Rabbit_Gene_Size>().Creation(new Vector3(offspring_Size_X, offspring_Size_Y, offspring_Size_Z));
-            genesC.genes[1].GetComponent<Rabbit_Gene_Fur>().Creation(new Color(offspring_ColourRed, offspring_ColourGreen, offspring_ColourBlue), 0);
+            genesC.genes[1].GetComponent<Rabbit_Gene_Fur>().Creation(new Color(offspring_ColourRed, offspring_ColourGreen, offspring_ColourBlue), offspring_FurLength, offspring_FurThickness);
             genesC.genes[2].Creation(offspring_Speed);
             genesC.genes[3].GetComponent<Rabbit_Gene_Eyesight>().Creation(offspring_EyesightRange, offspring_EyesightFOV);
             genesC.genes[4].GetComponent<Rabbit_Gene_Life>().Creation(rabbitClass.GetComponentInChildren<IdentityController>().DetermineSex(), offspring_MaturityMaleMin, offspring_MaturityMaleMax, offspring_MaturityFemaleMin, offspring_MaturityFemaleMax, offspring_LifetimeMin, offspring_LifetimeMax);
 
             rabbitClass.ApplyChromosome();
+
+            popManager.trackedAnimals.Add(rabbitClass);
         }
     }
 

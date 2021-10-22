@@ -53,6 +53,10 @@ MonoBehaviour:
     sizeVariationMax: 1.28
     colourRangeMin: 0.035
     colourRangeMax: 2.45
+    lengthRangeMin: 0.901
+    lengthRangeMax: 1.64
+    thicknessRangeMin: 0.941
+    thicknessRangeMax: 2.07
     speedVariationMin: 0.94
     speedVariationMax: 1.25
     eyeSightRangeMin: 0.937

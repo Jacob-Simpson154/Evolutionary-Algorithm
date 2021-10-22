@@ -10,7 +10,7 @@ public class TileController : MonoBehaviour
     public List<ConsumableController> trackedNourishment = new List<ConsumableController>();
     public ConsumableDetails tileNourishment;
 
-    [SerializeField]float temperature = 1.0f;
+    public float temperature = 1.0f;
 
     TimeController timeController;
     CalenderWeather weatherController;

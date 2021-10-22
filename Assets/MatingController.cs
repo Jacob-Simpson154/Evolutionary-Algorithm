@@ -109,11 +109,13 @@ public class MatingController : MonoBehaviour
             {
                 gestestationProgress = 0.0f;
                 isPregnant = false;
-
-                //This should plug into genetic algorithm
-                if (manager.identity.GetSex() == Sex.Female)
+                if (otherMate != null)
                 {
-                    FindObjectOfType<ReproductionManager>().Crossover(manager.transform, otherMate.transform);
+                    //This should plug into genetic algorithm
+                    if (manager.identity.GetSex() == Sex.Female)
+                    {
+                        FindObjectOfType<ReproductionManager>().Crossover(manager.transform, otherMate.transform);
+                    }
                 }
             }
         }
