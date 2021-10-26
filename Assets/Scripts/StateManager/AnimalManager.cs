@@ -15,6 +15,7 @@ public class AnimalManager : MonoBehaviour
     public SleepController sleep;
     public IdentityController identity;
     public MatingController mating;
+    public TemperatureController temperature;
     public Chromosome chromosomes;
     public TimeController timeCon;
 
@@ -22,8 +23,8 @@ public class AnimalManager : MonoBehaviour
     public Transform state_target;
     public List<Vector3> movement_path = new List<Vector3>();
     public bool shouldUpdatePath = false;
-    [SerializeField] float refreshTimer = 0;
-    [SerializeField] float refreshInterval = 0.5f;
+    [SerializeField] float pathRefreshTimer = 0;
+    [SerializeField] float pathRefreshInterval = 0.5f;
 
     [Header("Genetics - Size")]
     public Vector3 sizeMature;
@@ -38,8 +39,6 @@ public class AnimalManager : MonoBehaviour
     public float ageOfMaturityInDays;
     public float ageOfDeathInDays;
 
-    [Header("Genetics - Fur")]
-    public float currentTemperature = 10.0f;
 
     private void Start()
     {
@@ -56,6 +55,7 @@ public class AnimalManager : MonoBehaviour
         sleep.Init(this);
         identity.Init(this);
         mating.Init(this);
+        temperature.Init(this);
         chromosomes.Init(this);
     }
 
@@ -100,7 +100,7 @@ public class AnimalManager : MonoBehaviour
         diet.FindWater();
         diet.FindFood();
         mating.FindMates();
-        TemperatureCheck();
+        temperature.TemperatureCheck();
     }
 
     void AgeUp()
@@ -116,28 +116,7 @@ public class AnimalManager : MonoBehaviour
         }
     }
 
-    void TemperatureCheck()
-    {
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, -transform.up, out hit, 2.0f))
-        {
-            if(hit.transform.GetComponent<TileController>())
-            {
-                TileController tc = hit.transform.GetComponent<TileController>();
-                float tcTemperature = tc.temperature;
 
-                if (tcTemperature + chromosomes.GetComponentInChildren<Rabbit_Gene_Fur>().length* chromosomes.GetComponentInChildren<Rabbit_Gene_Fur>().thickness > currentTemperature)
-                    currentTemperature += timeCon.GetDayTimer();
-                else if (tcTemperature + chromosomes.GetComponentInChildren<Rabbit_Gene_Fur>().length * chromosomes.GetComponentInChildren<Rabbit_Gene_Fur>().thickness < currentTemperature)
-                    currentTemperature -= timeCon.GetDayTimer();
-
-                if (currentTemperature < 0)
-                {
-                    Destroy(this.gameObject);
-                }
-            }
-        }
-    }
 
     public bool IsAdult()
     {
@@ -155,10 +134,10 @@ public class AnimalManager : MonoBehaviour
     {
         if(shouldUpdatePath == true && state_target!=null)
         {
-            refreshTimer += Time.deltaTime;
-            if (refreshTimer >= refreshInterval)
+            pathRefreshTimer += Time.deltaTime;
+            if (pathRefreshTimer >= pathRefreshInterval)
             {
-                refreshTimer = 0;
+                pathRefreshTimer = 0;
                 navigation.CreatePathToTarget(transform.position, state_target.position);
             }
         }

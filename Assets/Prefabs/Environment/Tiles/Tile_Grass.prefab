@@ -94,12 +94,12 @@ GameObject:
   - component: {fileID: 3465847491153265626}
   - component: {fileID: -7626181093058445910}
   - component: {fileID: -996909612114127231}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tile_Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &270939878907596991
 Transform:
@@ -191,10 +191,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodePosition: {fileID: 2192100393124427133}
   canTraverse: 1
+  tileFood: Infinity
+  tileWater: 0
   trackedNourishment: []
-  tileNourishment:
-    hydrationAmount: 0
-    nutritionalAmount: 0
   temperature: 1
 --- !u!114 &-7626181093058445910
 MonoBehaviour:

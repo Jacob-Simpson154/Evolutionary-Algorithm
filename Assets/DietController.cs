@@ -7,9 +7,10 @@ public class DietController : MonoBehaviour
     [SerializeField] AnimalManager manager;
 
     [Header("Diet")]
-    public List<ConsumableController> visibleFood = new List<ConsumableController>();
-    public List<ConsumableController> visibleWater = new List<ConsumableController>();
-    public LayerMask consumableMask;
+    public List<TileController> visibleFood = new List<TileController>();
+    public LayerMask foodMask;
+    public List<TileController> visibleWater = new List<TileController>();
+    public LayerMask waterMask;
 
     [Header("Current Dietry Values")]
     public float food = 0;
@@ -95,34 +96,39 @@ public class DietController : MonoBehaviour
     {
         visibleWater.Clear();
 
-        Collider[] waterInArea = Physics.OverlapSphere(transform.position, manager.eyeSightRange, consumableMask);
-        if (waterInArea.Length == 0)
-            return false;
-        foreach (Collider item in waterInArea)
+        for (int scanRange = 1; scanRange < manager.eyeSightRange; scanRange++)
         {
-            ConsumableController inspectedItem = item.GetComponentInParent<ConsumableController>();
-            if (inspectedItem.nourishment.hydrationAmount > 0)
+            Collider[] foodInArea = Physics.OverlapSphere(manager.transform.position, scanRange, waterMask);
+            if (foodInArea.Length == 0)
+                continue;
+
+            foreach (Collider item in foodInArea)
             {
-                if (!visibleWater.Contains(inspectedItem))
+                TileController inspectedItem = item.GetComponentInParent<TileController>();
+
+                if (inspectedItem.GetAvailableNourishment(0) > 0)
                 {
-                    Vector3 directionToWater = (inspectedItem.transform.position - transform.position).normalized;
-                    if (Vector3.Angle(transform.forward, directionToWater) < manager.eyeSightAngle / 2)
+                    if (!visibleWater.Contains(inspectedItem))
                     {
-                        RaycastHit hit;
-                        if (Physics.Raycast(transform.position, directionToWater, out hit, Mathf.Infinity))
+                        Vector3 directionToFood = (inspectedItem.transform.position - manager.transform.position).normalized;
+                        if (Vector3.Angle(manager.transform.forward, directionToFood) < manager.eyeSightAngle / 2)
                         {
-                            if (hit.transform.GetComponentInParent<ConsumableController>() == inspectedItem)
+                            RaycastHit hit;
+                            if (Physics.Raycast(manager.transform.position, directionToFood, out hit, Mathf.Infinity))
                             {
-                                visibleWater.Add(item.GetComponentInParent<ConsumableController>());
+                                if (hit.transform.GetComponentInParent<TileController>() == inspectedItem)
+                                {
+                                    visibleWater.Add(item.GetComponentInParent<TileController>());
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
-        if (visibleWater.Count > 0)
-            return true;
+            if (visibleWater.Count > 0)
+                return true;
+        }
 
         return false;
     }
@@ -131,34 +137,39 @@ public class DietController : MonoBehaviour
     {
         visibleFood.Clear();
 
-        Collider[] foodInArea = Physics.OverlapSphere(transform.position, manager.eyeSightRange, consumableMask);
-        if (foodInArea.Length == 0)
-            return false;
-        foreach (Collider item in foodInArea)
+        for (int scanRange = 1; scanRange < manager.eyeSightRange; scanRange++)
         {
-            ConsumableController inspectedItem = item.GetComponentInParent<ConsumableController>();
-            if (inspectedItem.nourishment.nutritionalAmount > 0)
+            Collider[] foodInArea = Physics.OverlapSphere(manager.transform.position, scanRange, foodMask);
+            if (foodInArea.Length == 0)
+                continue;
+
+            foreach (Collider item in foodInArea)
             {
-                if (!visibleFood.Contains(inspectedItem))
+                TileController inspectedItem = item.GetComponentInParent<TileController>();
+
+                if (inspectedItem.GetAvailableNourishment(1) > 0)
                 {
-                    Vector3 directionToFood = (inspectedItem.transform.position - transform.position).normalized;
-                    if (Vector3.Angle(transform.forward, directionToFood) < manager.eyeSightAngle / 2)
+                    if (!visibleFood.Contains(inspectedItem))
                     {
-                        RaycastHit hit;
-                        if (Physics.Raycast(transform.position, directionToFood, out hit, Mathf.Infinity))
+                        Vector3 directionToFood = (inspectedItem.transform.position - manager.transform.position).normalized;
+                        if (Vector3.Angle(manager.transform.forward, directionToFood) < manager.eyeSightAngle / 2)
                         {
-                            if (hit.transform.GetComponentInParent<ConsumableController>() == inspectedItem)
+                            RaycastHit hit;
+                            if (Physics.Raycast(manager.transform.position, directionToFood, out hit, Mathf.Infinity))
                             {
-                                visibleFood.Add(item.GetComponentInParent<ConsumableController>());
+                                if (hit.transform.GetComponentInParent<TileController>() == inspectedItem)
+                                {
+                                    visibleFood.Add(item.GetComponentInParent<TileController>());
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
-        if (visibleFood.Count > 0)
-            return true;
+            if (visibleFood.Count > 0)
+                return true;
+        }
 
         return false;
     }
@@ -187,12 +198,12 @@ public class DietController : MonoBehaviour
             {
                 Transform closestWater = null;
 
-                foreach (ConsumableController item in visibleWater)
+                foreach (TileController item in visibleWater)
                 {
-                    if (closestWater == null && item.GetHydration() > 0)
+                    if (closestWater == null && item.GetAvailableNourishment(0) > 0)
                         closestWater = item.transform;
 
-                    if (closestWater != null && manager.GetDistance(item.transform.position) < manager.GetDistance(closestWater.position) && closestWater.GetComponent<ConsumableController>().GetHydration() < item.GetHydration())
+                    if (closestWater != null && (manager.GetDistance(item.transform.position) < manager.GetDistance(closestWater.position)) && (closestWater.GetComponent<TileController>().GetAvailableNourishment(0) < item.GetAvailableNourishment(0)))
                         closestWater = item.transform;
                 }
 
@@ -206,12 +217,12 @@ public class DietController : MonoBehaviour
             {
                 Transform closestWater = null;
 
-                foreach (ConsumableController item in visibleFood)
+                foreach (TileController item in visibleFood)
                 {
-                    if (closestWater == null && item.GetNutrition() > 0)
+                    if (closestWater == null && item.GetAvailableNourishment(1) > 0)
                         closestWater = item.transform;
 
-                    if (closestWater != null && manager.GetDistance(item.transform.position) < manager.GetDistance(closestWater.position) && closestWater.GetComponent<ConsumableController>().GetNutrition() < item.GetNutrition())
+                    if (closestWater != null && (manager.GetDistance(item.transform.position) < manager.GetDistance(closestWater.position)) && (closestWater.GetComponent<TileController>().GetAvailableNourishment(1) < item.GetAvailableNourishment(1)))
                         closestWater = item.transform;
                 }
 
@@ -223,20 +234,45 @@ public class DietController : MonoBehaviour
         return null;
     }
 
-    public void Consume(ConsumableDetails item)
+    public void Consume(TileController item)
     {
-        float temp = water;
-        water += item.hydrationAmount;
+        float availableWater = item.GetAvailableNourishment(0);
+        float availableFood = item.GetAvailableNourishment(1);
+
+        float targetWater = waterConsumedPerDay - water;
+        float targetFood = foodConsumedPerDay - food;
+
+        float waterToConsume = 0;
+        float foodToConsume = 0;
+
+        if (availableWater >= targetWater)
+        {
+            waterToConsume = targetWater;
+        }
+        else
+
+        if (availableWater <= targetWater)
+        {
+            waterToConsume = availableWater;
+        }
+
+        if (availableFood>=targetFood)
+        {
+            foodToConsume = targetFood;
+        } else
+            
+        if(availableFood<=targetFood)
+        {
+            foodToConsume = availableFood;
+        }
+
+        water += waterToConsume;
         if (water > 0)
             daysWithoutWater = 0;
-        float difference = water - temp;
-        item.hydrationAmount -= difference;
-
-        temp = food;
-        food += item.nutritionalAmount;
+        food += foodToConsume;
         if (food > 0)
             daysWithoutFood = 0;
-        difference = food - temp;
-        item.nutritionalAmount -= difference;
+
+        item.Consume(waterToConsume, foodToConsume);
     }
 }

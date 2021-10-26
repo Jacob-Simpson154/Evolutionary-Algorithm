@@ -92,15 +92,14 @@ GameObject:
   - component: {fileID: 1103246687437811706}
   - component: {fileID: 3938080741875913437}
   - component: {fileID: 3465847491153265626}
-  - component: {fileID: 1412321905819919287}
   - component: {fileID: -8548229993324581471}
   - component: {fileID: -2660062894051226247}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Tile_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &270939878907596991
 Transform:
@@ -192,27 +191,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodePosition: {fileID: 2192100393124427133}
   canTraverse: 0
-  trackedNourishment:
-  - {fileID: 1412321905819919287}
-  tileNourishment:
-    hydrationAmount: 0
-    nutritionalAmount: 0
+  tileFood: 0
+  tileWater: Infinity
+  trackedNourishment: []
   temperature: 1
---- !u!114 &1412321905819919287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8046071938595948727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff5bd85106384b4384b64fe4b6c8efb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nourishment:
-    hydrationAmount: Infinity
-    nutritionalAmount: 0
 --- !u!114 &-8548229993324581471
 MonoBehaviour:
   m_ObjectHideFlags: 0

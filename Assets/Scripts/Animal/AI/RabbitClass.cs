@@ -89,9 +89,9 @@ public class RabbitClass : AnimalBaseClass
             case Action.thirsty:
                 Debug.Log("Drinking");
 
-                ConsumableDetails nourishment = target.GetComponent<TileController>().GetNourishment();
-                water += nourishment.hydrationAmount;
-                food += nourishment.nutritionalAmount;
+                //ConsumableDetails nourishment = target.GetComponent<TileController>().GetNourishment();
+                //water += nourishment.hydrationAmount;
+                //food += nourishment.nutritionalAmount;
 
                 break;
             case Action.moving:

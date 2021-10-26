@@ -14,4 +14,9 @@ public class ConsumableController : MonoBehaviour
     {
         return nourishment.nutritionalAmount;
     }
+
+    public void Consume()
+    {
+
+    }
 }

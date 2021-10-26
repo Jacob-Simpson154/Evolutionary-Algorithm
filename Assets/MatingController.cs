@@ -31,7 +31,7 @@ public class MatingController : MonoBehaviour
         foreach (Collider item in animalsInArea)
         {
             AnimalManager inspectedItem = item.GetComponentInParent<AnimalManager>();
-            if (inspectedItem.identity.GetSpecies() == manager.identity.GetSpecies() && inspectedItem.identity.GetSex() != manager.identity.GetSex() && inspectedItem.mating.isPregnant == false && manager.mating.isPregnant ==false)
+            if (inspectedItem.identity.GetSpecies() == manager.identity.GetSpecies() && inspectedItem.identity.GetSex() != manager.identity.GetSex() && inspectedItem.mating.isPregnant == false && manager.mating.isPregnant == false && inspectedItem.IsAdult())
             {
                 if (!visibleMates.Contains(inspectedItem))
                 {

@@ -21,6 +21,7 @@ public class Rabbit_Gene_Fur : GeneBase
     {
         colour = col;
         length = len;
+        thickness = thick;
     }
 
     public override void ApplyGeneticInformation(AnimalManager manager)

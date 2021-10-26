@@ -10,7 +10,7 @@ public class EatState : State
     {
         if (manager.state_target.GetComponent<TileController>())
         {
-            manager.diet.Consume(manager.state_target.GetComponent<TileController>().GetNourishment());
+            manager.diet.Consume(manager.state_target.GetComponent<TileController>());
         }
 
         manager.state_target = null;

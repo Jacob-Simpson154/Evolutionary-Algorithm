@@ -13,6 +13,10 @@ public class WorldGenerationEditor : Editor
         WorldGeneration data = (WorldGeneration)target;
         serializedObject.Update();
 
+
+        SerializedProperty tile = serializedObject.FindProperty("tile");
+        EditorGUILayout.PropertyField(tile);
+
         SerializedProperty tileList = serializedObject.FindProperty("generatedTiles");
         EditorGUILayout.PropertyField(tileList);
 

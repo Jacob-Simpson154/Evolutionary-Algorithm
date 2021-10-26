@@ -8,7 +8,7 @@ public class SearchingState : State
 
     public override State RunCurrentState(AnimalManager manager)
     {
-        Vector3 randomPoint = transform.position + Random.insideUnitSphere * manager.eyeSightRange;
+        Vector3 randomPoint = transform.position + Random.insideUnitSphere * manager.eyeSightRange/2;
         RaycastHit hit;
         randomPoint.y = 500f;
         if (Physics.Raycast(randomPoint, Vector3.down, out hit, 1000f))

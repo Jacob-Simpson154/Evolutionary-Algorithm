@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88f3be37d50e674fa2ef2dcbe03982b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 40
 --- !u!1 &633755164189271088
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,10 +459,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   visibleFood: []
-  visibleWater: []
-  consumableMask:
+  foodMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1024
+  visibleWater: []
+  waterMask:
+    serializedVersion: 2
+    m_Bits: 2048
   food: 2000
   water: 2000
   daysWithoutWater: 0
@@ -836,8 +839,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72968027d61e914a92cb3c6104dcbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeSightRange: 10
-  eyeSightFOV: 354
+  eyeSightRange: 30
+  eyeSightFOV: 350
 --- !u!1 &5771034554858761595
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,13 +958,14 @@ MonoBehaviour:
   sleep: {fileID: 1475220086}
   identity: {fileID: 1288145266}
   mating: {fileID: 179389385}
+  temperature: {fileID: 2601757188148019743}
   chromosomes: {fileID: 2170419117671307849}
   timeCon: {fileID: 0}
   state_target: {fileID: 0}
   movement_path: []
   shouldUpdatePath: 0
-  refreshTimer: 0
-  refreshInterval: 0.5
+  pathRefreshTimer: 0
+  pathRefreshInterval: 0.5
   sizeMature: {x: 0, y: 0, z: 0}
   sizeIncreaseByDay: {x: 0, y: 0, z: 0}
   eyeSightRange: 10
@@ -969,7 +973,6 @@ MonoBehaviour:
   ageCurrent: 0
   ageOfMaturityInDays: 0
   ageOfDeathInDays: 0
-  currentTemperature: 10
 --- !u!1 &6241093620401811192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1051,7 @@ Transform:
   - {fileID: 1475220085}
   - {fileID: 1288145265}
   - {fileID: 179389384}
+  - {fileID: 6631117840863397564}
   m_Father: {fileID: 5771034554858761606}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1138,3 +1142,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thinkState: {fileID: 7211966659746050659}
+--- !u!1 &8573456284602599140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6631117840863397564}
+  - component: {fileID: 2601757188148019743}
+  m_Layer: 0
+  m_Name: Temperature
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6631117840863397564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573456284602599140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3209821317729054666}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2601757188148019743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573456284602599140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb6744fab23b614eb352b765dbdfdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  currentTemperature: 10

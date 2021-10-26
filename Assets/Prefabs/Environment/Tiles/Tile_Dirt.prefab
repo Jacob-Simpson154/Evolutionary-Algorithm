@@ -99,7 +99,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &270939878907596991
 Transform:
@@ -191,10 +191,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodePosition: {fileID: 2192100393124427133}
   canTraverse: 1
+  tileFood: 0
+  tileWater: 0
   trackedNourishment: []
-  tileNourishment:
-    hydrationAmount: 0
-    nutritionalAmount: 0
   temperature: 1
 --- !u!114 &-8807121022086565795
 MonoBehaviour:

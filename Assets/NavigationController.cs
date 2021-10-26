@@ -5,7 +5,6 @@ using UnityEngine;
 public class NavigationController : MonoBehaviour
 {
     [SerializeField] WorldGeneration worldGen;
-    [SerializeField] bool debugPoints;
 
     public Point Vector3ToPoint(Vector3 position)                           //Get point from world pos
     {
