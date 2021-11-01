@@ -13,6 +13,8 @@ public class PopulationManager : MonoBehaviour
 
     public List<AnimalManager> trackedAnimals;
 
+    UserInterfaceController uiController;
+
     public void Awake()
     {
         foreach (PopulationManagerStruct item in population)
@@ -55,8 +57,38 @@ public class PopulationManager : MonoBehaviour
                     rabbitClass.ApplyChromosome();
                 }
 
-                trackedAnimals.Add(animal.GetComponent<AnimalManager>());
+                AddToPopulation(animal.GetComponent<AnimalManager>());
             }
         }
+
+        uiController.DisplayRabbit();
+    }
+
+    public void AddToPopulation(AnimalManager manager)
+    {
+        if (uiController == null)
+            uiController = FindObjectOfType<UserInterfaceController>();
+
+        trackedAnimals.Add(manager);
+        uiController.UpdatePopulation(trackedAnimals.Count);
+    }
+
+    public void RemoveFromPopulation(AnimalManager manager)
+    {
+        if (uiController == null)
+            uiController = FindObjectOfType<UserInterfaceController>();
+
+        trackedAnimals.Remove(manager);
+        uiController.UpdatePopulation(trackedAnimals.Count);
+    }
+
+    public int GetPopulationCount()
+    {
+        return trackedAnimals.Count;
+    }
+
+    public AnimalManager GetAnimal(int index)
+    {
+        return trackedAnimals[index];
     }
 }

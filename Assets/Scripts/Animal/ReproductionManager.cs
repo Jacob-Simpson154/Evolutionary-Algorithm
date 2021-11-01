@@ -100,7 +100,7 @@ public class ReproductionManager : MonoBehaviour
 
             rabbitClass.ApplyChromosome();
 
-            popManager.trackedAnimals.Add(rabbitClass);
+            popManager.AddToPopulation(rabbitClass);
         }
     }
 

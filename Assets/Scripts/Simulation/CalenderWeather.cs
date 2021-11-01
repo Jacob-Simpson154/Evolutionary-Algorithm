@@ -30,6 +30,7 @@ public class CalenderWeather : MonoBehaviour
 
 
     TimeController timeController;
+    UserInterfaceController uiController;
 
     private void Awake()
     {
@@ -37,6 +38,8 @@ public class CalenderWeather : MonoBehaviour
         timeController = FindObjectOfType<TimeController>();
         timeController.AddMonthlyListener(UpdateMonth);
         timeController.AddDailyListener(UpdateDailyVariables);
+
+        uiController = FindObjectOfType<UserInterfaceController>();
 
         UpdateDailyVariables();
     }
@@ -72,6 +75,7 @@ public class CalenderWeather : MonoBehaviour
         //Wind
         windDirection = new Vector3(UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f));
 
+        uiController.UpdateTemperature(ambientTemperature);
     }
 
 

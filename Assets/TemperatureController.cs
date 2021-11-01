@@ -29,9 +29,14 @@ public class TemperatureController : MonoBehaviour
 
                 if (currentTemperature < 0)
                 {
-                    Destroy(manager.gameObject);
+                    manager.Death();
                 }
             }
         }
+    }
+
+    public float GetTemperature()
+    {
+        return currentTemperature;
     }
 }

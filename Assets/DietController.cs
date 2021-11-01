@@ -50,7 +50,7 @@ public class DietController : MonoBehaviour
             daysWithoutWater += t;
             if(daysWithoutWater>=daysUntilDehydrationDeath)
             {
-                Destroy(manager.gameObject);
+                manager.Death();
             }
         }
 
@@ -59,7 +59,7 @@ public class DietController : MonoBehaviour
             daysWithoutFood += t;
             if (daysWithoutFood >= daysUntilStarvingDeath)
             {
-                Destroy(manager.gameObject);
+                manager.Death();
             }
         }
     }

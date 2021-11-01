@@ -112,7 +112,7 @@ public class AnimalManager : MonoBehaviour
 
         if (ageCurrent>=ageOfDeathInDays)
         {
-            Destroy(this.gameObject);
+            Death();
         }
     }
 
@@ -141,6 +141,12 @@ public class AnimalManager : MonoBehaviour
                 navigation.CreatePathToTarget(transform.position, state_target.position);
             }
         }
+    }
+
+    public void Death()
+    {
+        FindObjectOfType<PopulationManager>().RemoveFromPopulation(this);
+        Destroy(this.gameObject);
     }
 
 }
