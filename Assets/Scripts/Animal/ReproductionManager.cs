@@ -6,7 +6,7 @@ using System;
 public class ReproductionManager : MonoBehaviour
 {
     [SerializeField] float mutationChance = 0.1f;
-    [SerializeField] GameObject rabbit;
+    public GameObject rabbit;
     PopulationManager popManager;
 
     private void Start()

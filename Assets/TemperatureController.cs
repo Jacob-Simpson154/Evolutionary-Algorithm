@@ -31,6 +31,11 @@ public class TemperatureController : MonoBehaviour
                 {
                     manager.Death();
                 }
+
+                if(currentTemperature > 30)
+                {
+                    manager.Death();
+                }
             }
         }
     }

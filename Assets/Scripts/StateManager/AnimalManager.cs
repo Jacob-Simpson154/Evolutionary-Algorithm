@@ -125,6 +125,13 @@ public class AnimalManager : MonoBehaviour
         else return false;
     }
 
+    public bool TooMature()
+    {
+        if (ageCurrent >= (ageOfDeathInDays / 3))
+            return true;
+        else return false;
+    }
+
     public float GetDistance(Vector3 destination)
     {
         return Vector3.Distance(transform.position, destination);
@@ -148,5 +155,7 @@ public class AnimalManager : MonoBehaviour
         FindObjectOfType<PopulationManager>().RemoveFromPopulation(this);
         Destroy(this.gameObject);
     }
+
+
 
 }

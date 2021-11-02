@@ -85,11 +85,12 @@ public class ThinkState : State
 
         else
 
-        if(manager.mating.HasMates() && manager.mating.isPregnant==false && manager.IsAdult())
+        if(manager.mating.HasMates() && manager.mating.isPregnant==false && manager.IsAdult() && !manager.TooMature())
         {
             if(manager.state_target == null)
             {
-                Transform destination = manager.mating.GetClosestMate();
+                //Transform destination = manager.mating.GetClosestMate();
+                Transform destination = manager.mating.GetBestMate();
                 if(destination!=null)
                 {
                     manager.state_target = destination;
