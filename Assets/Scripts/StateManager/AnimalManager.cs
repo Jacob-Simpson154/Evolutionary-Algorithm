@@ -25,6 +25,7 @@ public class AnimalManager : MonoBehaviour
     public bool shouldUpdatePath = false;
     [SerializeField] float pathRefreshTimer = 0;
     [SerializeField] float pathRefreshInterval = 0.5f;
+    public Vector3 dateOfBirth;
 
     [Header("Genetics - Size")]
     public Vector3 sizeMature;
